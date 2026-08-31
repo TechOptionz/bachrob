@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand palette — taken verbatim from the Claude design file */
+  --color-navy-900: #12192A;
+  --color-navy-800: #16396E;
+  --color-navy-700: #1B2430;
+  --color-blue-700: #1E4B8F;
+  --color-blue-600: #2A5CA8;
+  --color-blue-300: #7593C1;
+  --color-blue-200: #9FB8DC;
+  --color-blue-150: #C8D6EB;
+  --color-blue-100: #D5E0F0;
+  --color-blue-50: #E8EEF7;
+  --color-blue-25: #F5F8FC;
+  --color-cream: #FAFAF8;
+  --color-stone: #F1F3F0;
+  --color-line: #E5E4E0;
+  --color-rule: #D8DCE2;
+  --color-ink: #1B2430;
+  --color-body: #374151;
+  --color-muted: #4B5563;
+  --color-subtle: #6B7280;
+  --color-field: #D1D5DB;
+  --color-footer-text: #8A94A6;
+  --color-footer-strong: #B4BECE;
+
+  --font-serif: var(--font-libre-caslon), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-source-sans), system-ui, -apple-system, sans-serif;
+}
+
+/* These must live in the base layer — unlayered rules outrank every Tailwind
+   utility, which would make `text-white` links on the navy sections invisible. */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background: #fafaf8;
+    color: #1b2430;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: #1e4b8f;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #16396e;
+  }
+
+  input,
+  textarea,
+  select {
+    font-family: var(--font-sans);
+  }
+}
+
+@layer components {
+  /* Section rhythm from the design: 96px block padding, 40px inline gutters,
+     stepped down on narrow screens so nothing gets cramped on mobile. */
+  .section {
+    padding: 96px 40px;
+  }
+
+  .gutter {
+    padding-inline: 40px;
+  }
+
+  /* Always an inner element — `.section`/`.gutter` own the gutter, this owns
+     the 1100px measure. Combining the two on one box would double-inset it. */
+  .shell {
+    max-width: 1100px;
+    margin-inline: auto;
+  }
+
+  .eyebrow {
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  /* Underlined text link used for the section CTAs */
+  .rule-link {
+    font-weight: 700;
+    font-size: 16px;
+    border-bottom: 2px solid #1e4b8f;
+    padding-bottom: 2px;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 64px 20px;
+  }
+  .gutter {
+    padding-inline: 20px;
+  }
+}
