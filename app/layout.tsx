@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Libre_Caslon_Text, Source_Sans_3 } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const libreCaslon = Libre_Caslon_Text({
@@ -54,7 +55,10 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en-AU" className={`${libreCaslon.variable} ${sourceSans.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
