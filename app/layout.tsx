@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Libre_Caslon_Text, Source_Sans_3 } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const libreCaslon = Libre_Caslon_Text({
@@ -61,6 +62,7 @@ export default function RootLayout({
           <style>{`[data-reveal]{opacity:1 !important;transform:none !important}`}</style>
         </noscript>
         {children}
+        <Analytics />
       </body>
     </html>
   );
