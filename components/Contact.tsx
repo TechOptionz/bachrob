@@ -23,7 +23,7 @@ function Detail({
 
 export default function Contact() {
   return (
-    <section id="contact" className="section scroll-mt-24">
+    <section id="contact" className="section scroll-mt-24 bg-cream">
       <div className="shell grid grid-cols-[repeat(auto-fit,minmax(min(340px,100%),1fr))] gap-14">
         <div>
           <div className="eyebrow mb-[14px] text-[#1E4B8F]">Get in touch</div>

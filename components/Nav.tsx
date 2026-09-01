@@ -14,7 +14,22 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-[#E5E4E0] bg-white">
+    <nav className="sticky top-0 z-50 bg-white">
+      {/* Curvy bottom edge — a white strip with an elliptical dome cut out,
+          overlaid on whatever scrolls beneath the nav. The drop-shadow rides
+          the curve so the edge reads against light sections too. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-full h-12 md:h-[72px]"
+      >
+        <svg
+          viewBox="0 0 1600 72"
+          preserveAspectRatio="none"
+          className="block h-full w-full [filter:drop-shadow(0_12px_14px_rgba(18,25,42,0.16))]"
+        >
+          <path d="M0 0 H1600 V72 Q800 -72 0 72 Z" fill="#ffffff" />
+        </svg>
+      </div>
       <div className="flex items-center justify-between gap-6 px-5 py-[14px] md:px-10">
         <a href="#top" className="flex items-center gap-3">
           <Image

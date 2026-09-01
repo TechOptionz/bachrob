@@ -13,15 +13,21 @@ export default function Home() {
     <div className="min-w-[320px]">
       <TopBar />
       <Nav />
-      <main>
-        <Hero />
-        <Services />
-        <About />
-        <Team />
-        <Resources />
-        <Contact />
-      </main>
-      <Footer />
+      <Hero />
+      {/* Higher stacking context than the sticky hero — this whole block
+          scrolls up and covers the pinned hero (Fusion-style curtain). The
+          curved, shadowed top edge overlaps the hero so the navy shows
+          behind the corners and the white sheet reads as a separate layer. */}
+      <div className="relative z-10 -mt-16 overflow-hidden rounded-t-[50%_48px] bg-cream shadow-[0_-26px_44px_-10px_rgba(18,25,42,0.28)] md:rounded-t-[50%_72px]">
+        <main>
+          <Services />
+          <About />
+          <Team />
+          <Resources />
+          <Contact />
+        </main>
+        <Footer />
+      </div>
     </div>
   );
 }

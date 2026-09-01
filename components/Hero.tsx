@@ -11,9 +11,12 @@ export default function Hero() {
   return (
     <header
       id="top"
-      className="gutter scroll-mt-24 bg-[linear-gradient(160deg,#16396E_0%,#1E4B8F_70%,#2A5CA8_100%)] pb-0 pt-16 text-white md:pt-24"
+      className="sticky top-[74px] z-0 scroll-mt-24 bg-white"
     >
-      <div className="shell">
+      {/* The dome over the hero is drawn by the nav's curvy bottom edge —
+          the hero itself stays square so the curves don't double up. */}
+      <div className="gutter bg-[linear-gradient(160deg,#16396E_0%,#1E4B8F_70%,#2A5CA8_100%)] pb-16 pt-24 text-white md:pb-20 md:pt-32">
+        <div className="shell">
         <div className="max-w-[720px]">
           <div className="eyebrow mb-5 text-[#9FB8DC]">
             Ipswich, Queensland · Since 1990
@@ -49,6 +52,7 @@ export default function Hero() {
               <div className="text-[14px] text-[#9FB8DC]">{s.label}</div>
             </div>
           ))}
+        </div>
         </div>
       </div>
     </header>

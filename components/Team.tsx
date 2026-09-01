@@ -3,7 +3,7 @@ import TeamCard from "./TeamCard";
 
 export default function Team() {
   return (
-    <section id="team" className="section scroll-mt-24">
+    <section id="team" className="section scroll-mt-24 bg-cream">
       <div className="shell">
         <div className="eyebrow mb-[14px] text-[#1E4B8F]">Our people</div>
         <h2 className="m-0 mb-3 font-serif text-[28px] font-normal md:text-[36px]">
