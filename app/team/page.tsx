@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 
 import TopBar from "@/components/TopBar";
@@ -10,7 +9,7 @@ import PageHero from "@/components/PageHero";
 import SectionShell, { SectionHeading } from "@/components/service/SectionShell";
 import Reveal from "@/components/service/Reveal";
 import TeamProfileCard from "@/components/TeamProfileCard";
-import { team } from "@/lib/data";
+import { teamByGroup, teamGroups } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Our Team",
@@ -59,36 +58,74 @@ export default function TeamPage() {
           eyebrow="Our team"
           heading="The people behind the practice."
           intro="Our team combines deep technical experience with something clients notice from the first phone call — a genuinely client-first approach. Accountants, auditors, SMSF specialists and support staff, all working from one office in the heart of Ipswich."
-          media={
-            <Image
-              src="/assets/group-photo-staff.png"
-              alt="The Bachmann Robinson team"
-              width={1200}
-              height={800}
-              priority
-              sizes="(max-width: 1024px) 100vw, 520px"
-              className="block h-auto w-full shadow-[0_20px_50px_rgba(22,57,110,0.18)]"
-            />
-          }
+          /* The group shot runs full-bleed with the copy pinned along the
+             bottom, so the crop trims ceiling and keeps the faces sitting
+             above the text row. */
+          backgroundSrc="/assets/group-photo-boardroom.jpg"
+          backgroundPosition="center 70%"
           caption="The Bachmann Robinson team — Level 1, 265 Brisbane Street, Ipswich"
         />
 
-        {/* B. Team grid — 3-up desktop, 2-up tablet, single column on mobile.
-            Portraits are placeholders: drop the real photos into
-            /public/images/team/<first-last>.jpg and swap them in inside
-            TeamProfileCard (instructions in that file). */}
+        {/* B. The roster, split by the three groups the firm works in, so ten
+            people read as a structure instead of one long grid. Each group is
+            3-up on desktop, 2-up on tablet, single column on mobile. */}
         <SectionShell tone="white">
           <SectionHeading
             eyebrow="Leadership & staff"
             heading="Meet the team"
             intro="The knowledge and insights to uncover opportunities — and the commitment to see them through."
           />
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {team.map((m, i) => (
-              <Reveal key={m.name} delay={(i % 3) * 60} className="h-full">
-                <TeamProfileCard member={m} />
-              </Reveal>
-            ))}
+
+          <div className="mt-14 flex flex-col gap-16 md:gap-20">
+            {teamGroups.map((group) => {
+              const members = teamByGroup(group.key);
+              if (members.length === 0) return null;
+
+              return (
+                <section key={group.key} aria-labelledby={`team-${group.key}`}>
+                  {/* The navy rule draws itself in as the heading arrives —
+                      same treatment the editorial service sections use. */}
+                  <Reveal>
+                    <span
+                      aria-hidden="true"
+                      className="br-draw block h-[2px] w-full bg-[#1E4B8F]"
+                    />
+                    <div className="pt-5">
+                      <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
+                        <h3
+                          id={`team-${group.key}`}
+                          className="m-0 font-serif text-[22px] font-normal leading-[1.25] text-[#1B2430] md:text-[26px]"
+                        >
+                          {group.label}
+                        </h3>
+                        <span className="eyebrow text-[11px] text-[#8A94A6]">
+                          {members.length}{" "}
+                          {members.length === 1 ? "person" : "people"}
+                        </span>
+                      </div>
+                      <p className="m-0 mt-2 max-w-[680px] text-[16px] leading-[1.7] text-[#4B5563]">
+                        {group.blurb}
+                      </p>
+                    </div>
+                  </Reveal>
+
+                  {/* Staggered by column so a row arrives left-to-right rather
+                      than all at once. */}
+                  <div className="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+                    {members.map((m, i) => (
+                      <Reveal
+                        key={m.name}
+                        variant="rise"
+                        delay={(i % 3) * 90}
+                        className="h-full"
+                      >
+                        <TeamProfileCard member={m} />
+                      </Reveal>
+                    ))}
+                  </div>
+                </section>
+              );
+            })}
           </div>
         </SectionShell>
 

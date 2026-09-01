@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { services } from "@/lib/data";
 
 /* Every top-level item now lives on its own route. */
 const links = [
@@ -11,10 +12,31 @@ const links = [
   { href: "/about", label: "About" },
   { href: "/team", label: "Team" },
   { href: "/resources", label: "Resources" },
+  { href: "/contact", label: "Contact" },
 ];
+
+function Chevron({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 12 12"
+      aria-hidden
+      className={`h-[10px] w-[10px] ${className ?? ""}`}
+    >
+      <path
+        d="M2 4 L6 8 L10 4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const pathname = usePathname();
   /* Exact match, plus child routes — Services stays lit on /services/[slug]. */
   const isActive = (href: string) =>
@@ -64,22 +86,69 @@ export default function Nav() {
 
         {/* Desktop links */}
         <div className="hidden items-center gap-[26px] lg:flex">
-          {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              aria-current={isActive(l.href) ? "page" : undefined}
-              className={`text-[15px] hover:text-[#1E4B8F] ${
-                isActive(l.href)
-                  ? "font-semibold text-[#1E4B8F]"
-                  : "font-medium text-[#374151]"
-              }`}
-            >
-              {l.label}
-            </Link>
-          ))}
+          {links.map((l) =>
+            l.href === "/services" ? (
+              /* Services gets a hover/focus dropdown listing every service. */
+              <div key={l.href} className="group relative">
+                <Link
+                  href={l.href}
+                  aria-current={isActive(l.href) ? "page" : undefined}
+                  className={`flex items-center gap-[6px] text-[15px] hover:text-[#1E4B8F] ${
+                    isActive(l.href)
+                      ? "font-semibold text-[#1E4B8F]"
+                      : "font-medium text-[#374151]"
+                  }`}
+                >
+                  {l.label}
+                  <Chevron className="transition-transform duration-150 group-hover:rotate-180" />
+                </Link>
+                {/* pt bridges the hover gap between the link and the panel. */}
+                <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-4 opacity-0 transition-all duration-150 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+                  <div className="w-[300px] border border-[#E5E4E0] bg-white py-2 shadow-[0_18px_36px_rgba(18,25,42,0.16)]">
+                    {services.map((s) => (
+                      <Link
+                        key={s.slug}
+                        href={`/services/${s.slug}`}
+                        aria-current={
+                          pathname === `/services/${s.slug}` ? "page" : undefined
+                        }
+                        className={`block px-5 py-[9px] text-[14px] hover:bg-[#F5F7FA] hover:text-[#1E4B8F] ${
+                          pathname === `/services/${s.slug}`
+                            ? "font-semibold text-[#1E4B8F]"
+                            : "text-[#374151]"
+                        }`}
+                      >
+                        {s.name}
+                      </Link>
+                    ))}
+                    <div className="mt-2 border-t border-[#F1F3F0] pt-2">
+                      <Link
+                        href="/services"
+                        className="block px-5 py-[9px] text-[14px] font-semibold text-[#1E4B8F] hover:bg-[#F5F7FA]"
+                      >
+                        View all services &rarr;
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <Link
+                key={l.href}
+                href={l.href}
+                aria-current={isActive(l.href) ? "page" : undefined}
+                className={`text-[15px] hover:text-[#1E4B8F] ${
+                  isActive(l.href)
+                    ? "font-semibold text-[#1E4B8F]"
+                    : "font-medium text-[#374151]"
+                }`}
+              >
+                {l.label}
+              </Link>
+            )
+          )}
           <Link
-            href="/#contact"
+            href="/contact"
             className="bg-[#1E4B8F] px-5 py-[10px] text-[15px] font-semibold text-white hover:bg-[#16396E] hover:text-white"
           >
             Book a consultation
@@ -120,23 +189,78 @@ export default function Nav() {
           className="border-t border-[#E5E4E0] px-5 pb-5 pt-2 lg:hidden"
         >
           <div className="flex flex-col">
-            {links.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                aria-current={isActive(l.href) ? "page" : undefined}
-                className={`border-b border-[#F1F3F0] py-3 text-[16px] hover:text-[#1E4B8F] ${
-                  isActive(l.href)
-                    ? "font-semibold text-[#1E4B8F]"
-                    : "font-medium text-[#374151]"
-                }`}
-              >
-                {l.label}
-              </Link>
-            ))}
+            {links.map((l) =>
+              l.href === "/services" ? (
+                <div key={l.href} className="border-b border-[#F1F3F0]">
+                  <div className="flex items-center justify-between">
+                    <Link
+                      href={l.href}
+                      onClick={() => setOpen(false)}
+                      aria-current={isActive(l.href) ? "page" : undefined}
+                      className={`flex-1 py-3 text-[16px] hover:text-[#1E4B8F] ${
+                        isActive(l.href)
+                          ? "font-semibold text-[#1E4B8F]"
+                          : "font-medium text-[#374151]"
+                      }`}
+                    >
+                      {l.label}
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => setServicesOpen((v) => !v)}
+                      aria-expanded={servicesOpen}
+                      aria-label="Toggle services list"
+                      className="flex h-11 w-11 items-center justify-center text-[#374151]"
+                    >
+                      <Chevron
+                        className={`transition-transform duration-150 ${
+                          servicesOpen ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+                  </div>
+                  {servicesOpen && (
+                    <div className="flex flex-col pb-3 pl-4">
+                      {services.map((s) => (
+                        <Link
+                          key={s.slug}
+                          href={`/services/${s.slug}`}
+                          onClick={() => setOpen(false)}
+                          aria-current={
+                            pathname === `/services/${s.slug}`
+                              ? "page"
+                              : undefined
+                          }
+                          className={`py-[10px] text-[15px] hover:text-[#1E4B8F] ${
+                            pathname === `/services/${s.slug}`
+                              ? "font-semibold text-[#1E4B8F]"
+                              : "text-[#4B5563]"
+                          }`}
+                        >
+                          {s.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  aria-current={isActive(l.href) ? "page" : undefined}
+                  className={`border-b border-[#F1F3F0] py-3 text-[16px] hover:text-[#1E4B8F] ${
+                    isActive(l.href)
+                      ? "font-semibold text-[#1E4B8F]"
+                      : "font-medium text-[#374151]"
+                  }`}
+                >
+                  {l.label}
+                </Link>
+              )
+            )}
             <Link
-              href="/#contact"
+              href="/contact"
               onClick={() => setOpen(false)}
               className="mt-4 bg-[#1E4B8F] px-5 py-3 text-center text-[15px] font-semibold text-white hover:bg-[#16396E] hover:text-white"
             >

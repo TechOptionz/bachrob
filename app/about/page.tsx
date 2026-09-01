@@ -9,6 +9,7 @@ import PageHero from "@/components/PageHero";
 import SectionShell, { SectionHeading } from "@/components/service/SectionShell";
 import Reveal from "@/components/service/Reveal";
 import ImagePlaceholder from "@/components/service/ImagePlaceholder";
+import KeyobPartnerSection from "@/components/partner/KeyobPartnerSection";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -114,9 +115,9 @@ export default function AboutPage() {
           intro="Bachmann Robinson is a local Ipswich firm operating since the early 1990s. We combine the technical depth of accountants, auditors and registered tax agents with something rarer — a genuine commitment to the people behind the numbers."
           media={
             <ImagePlaceholder
-              label="Professional company / office image"
+              label="About hero boardroom"
               suggestedImage="A warm, professional photograph of the Bachmann Robinson office or team at work — natural light, approachable rather than corporate-stocky. Approx. 1200×900."
-              alt="The Bachmann Robinson office in Ipswich"
+              alt="The Bachmann Robinson team meeting in the boardroom"
               aspectRatio="4:3"
             />
           }
@@ -283,7 +284,12 @@ export default function AboutPage() {
           </Reveal>
         </SectionShell>
 
-        {/* F. Closing CTA */}
+        {/* F. Technology partner — the full Bachmann Robinson × KEYOB story.
+            Anchored as #it-partner so the promo placements elsewhere on the
+            site have a canonical section to point to. */}
+        <KeyobPartnerSection />
+
+        {/* G. Closing CTA */}
         <ContactCTA />
       </main>
 

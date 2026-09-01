@@ -1,48 +1,43 @@
 import Link from "next/link";
+import Reveal from "./service/Reveal";
+import ResourceCard from "./ResourceCard";
 import { resources } from "@/lib/data";
 
 export default function Resources() {
   return (
-    <section
-      id="resources"
-      className="gutter scroll-mt-24 bg-[#16396E] py-20 text-white"
-    >
+    <section id="resources" className="section scroll-mt-24 bg-[#F1F3F0]">
       <div className="shell">
-        <div className="eyebrow mb-[14px] text-[#9FB8DC]">Helpful resources</div>
-        <h2 className="m-0 mb-3 font-serif text-[30px] font-normal md:text-[38px]">
-          Tools &amp; guides from the ATO
-        </h2>
-        <p className="m-0 mb-10 max-w-[620px] text-[17px] text-[#D5E0F0]">
-          Quick links we share with clients most often. For anything specific to
-          your situation, give us a call — that&rsquo;s what we&rsquo;re here
-          for.
-        </p>
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(min(250px,100%),1fr))] gap-[14px]">
-          {resources.map((r) => (
-            <a
-              key={r.name}
-              href={r.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block border border-white/25 px-5 py-[18px] text-white transition-colors hover:border-white hover:bg-white/[0.06] hover:text-white"
-            >
-              <div className="mb-[6px] text-[15.5px] font-bold">
-                {r.name} ↗
-              </div>
-              <div className="text-[14.5px] leading-[1.5] text-[#D5E0F0]">
-                {r.desc}
-              </div>
-            </a>
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)] lg:items-end lg:gap-16">
+          <Reveal variant="left">
+            <div className="eyebrow mb-[14px] text-[#1E4B8F]">
+              Helpful resources
+            </div>
+            <h2 className="m-0 font-serif text-[30px] font-normal leading-[1.2] text-pretty md:text-[38px]">
+              Tools &amp; guides from the ATO
+            </h2>
+          </Reveal>
+          <Reveal variant="right" delay={90}>
+            <p className="m-0 max-w-[480px] text-[17px] leading-[1.7] text-[#374151] lg:pb-2">
+              Quick links we share with clients most often. For anything
+              specific to your situation, give us a call — that&rsquo;s what
+              we&rsquo;re here for.
+            </p>
+          </Reveal>
+        </div>
+
+        <div className="mt-12 grid grid-cols-[repeat(auto-fill,minmax(min(250px,100%),1fr))] gap-4 md:mt-14">
+          {resources.map((r, i) => (
+            <Reveal key={r.name} delay={(i % 4) * 70} variant="rise" className="h-full">
+              <ResourceCard resource={r} />
+            </Reveal>
           ))}
         </div>
-        <div className="mt-10">
-          <Link
-            href="/resources"
-            className="border-b-2 border-white pb-[2px] text-[16px] font-bold text-white hover:text-white"
-          >
+
+        <Reveal variant="fade" className="mt-10">
+          <Link href="/resources" className="rule-link">
             Browse all insights &amp; resources →
           </Link>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

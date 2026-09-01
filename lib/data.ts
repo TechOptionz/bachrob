@@ -1,12 +1,14 @@
 import type { ServiceSlug } from "./services";
 
 export type Service = { name: string; desc: string; slug: ServiceSlug };
+export type TeamGroupKey = "practice" | "accounting" | "client-services";
 export type TeamMember = {
   name: string;
   role: string;
   creds: string;
   bio: string;
   more: string;
+  group: TeamGroupKey;
 };
 export type Resource = { name: string; desc: string; url: string };
 
@@ -61,6 +63,7 @@ export const services: Service[] = [
 export const team: TeamMember[] = [
   {
     name: "Nayyar Hayat",
+    group: "practice",
     role: "Director",
     creds: "CPA (Aus) · CFA (USA) · FCMA · Tax Agent · FASEA qualified",
     bio: "Partner and Practice Manager with extensive expertise in taxation, strategic planning, corporate governance, global tax structures and risk management.",
@@ -68,6 +71,7 @@ export const team: TeamMember[] = [
   },
   {
     name: "Richard Dinsdale",
+    group: "practice",
     role: "Consultant",
     creds: "BBus Accounting · IPA · previously CPA (30 years)",
     bio: "With the firm since October 1996 and in public accounting since 1975. Richard conducts audits of non-profit associations and trust accounts, alongside an extensive range of accounting and taxation clients.",
@@ -75,6 +79,7 @@ export const team: TeamMember[] = [
   },
   {
     name: "Tracey Ashton",
+    group: "accounting",
     role: "Senior Accountant (SMSF)",
     creds: "BBus · SSA",
     bio: "Our go-to person for anything to do with superannuation. An SMSF Specialist Advisor with the SMSF Association, registered with the Tax Practitioners Board, with extensive experience in Self-Managed Superannuation Funds.",
@@ -82,6 +87,7 @@ export const team: TeamMember[] = [
   },
   {
     name: "Parvez Rahim",
+    group: "accounting",
     role: "Accountant",
     creds: "B.Com (Accountancy)",
     bio: "Over ten years of industry experience working with small to medium businesses on their accounting and taxation requirements, providing tailored business solutions and advice on accounting systems.",
@@ -89,6 +95,7 @@ export const team: TeamMember[] = [
   },
   {
     name: "Huma Ahmed",
+    group: "accounting",
     role: "Accountant",
     creds: "MPA (QUT)",
     bio: "With the firm since May 2024, having worked in accounting firms since 2017. Huma’s strengths include identifying tax-saving opportunities and implementing effective tax strategies.",
@@ -96,6 +103,7 @@ export const team: TeamMember[] = [
   },
   {
     name: "Rebecka Davey",
+    group: "accounting",
     role: "SMSF Administration Assistant / Bookkeeper",
     creds: "BBE (LAR) · GDLA",
     bio: "After careers in Landscape Architecture and Real Estate, Rebecka has found her niche working alongside Tracey Ashton administering Self-Managed Superannuation Funds.",
@@ -103,6 +111,7 @@ export const team: TeamMember[] = [
   },
   {
     name: "Susan Boyle",
+    group: "accounting",
     role: "Bookkeeper",
     creds: "",
     bio: "With Bachmann Robinson since May 2006, Susan meticulously handles bookkeeping and business activity statements for many of our clients, and is proficient in QuickBooks, Reckon, MYOB and other accounting packages.",
@@ -110,6 +119,7 @@ export const team: TeamMember[] = [
   },
   {
     name: "Josella Gordon",
+    group: "client-services",
     role: "Administration Officer",
     creds: "Dip. Business Administration",
     bio: "With the firm since January 2010, Josella handles ASIC reviews and related matters for more than 200 companies, alongside general admin and reception duties.",
@@ -117,6 +127,7 @@ export const team: TeamMember[] = [
   },
   {
     name: "Kate Grindrod",
+    group: "client-services",
     role: "Receptionist / Admin",
     creds: "",
     bio: "Our front-of-house admin since July 2016, after 10 years in retail administration and 2 years in logistics management. Kate enjoys helping clients decode accountant-speak.",
@@ -124,6 +135,7 @@ export const team: TeamMember[] = [
   },
   {
     name: "Russell Bachmann",
+    group: "practice",
     role: "Consultant",
     creds: "",
     bio: "Russell acquired the practice in 1990; the firm was rebadged Bachmann Robinson in 1997. Through his vast experience and intimate knowledge of tax law, he provides invaluable technical knowledge of accounting and tax applications.",
@@ -179,6 +191,45 @@ export const initials = (name: string) =>
     .split(" ")
     .map((w) => w[0])
     .join("");
+
+/**
+ * The roster grouped the way the firm actually divides work, so a ten-person
+ * list reads as a structure rather than a wall of cards. Order here is the
+ * order the groups appear on /team.
+ */
+export const teamGroups: { key: TeamGroupKey; label: string; blurb: string }[] = [
+  {
+    key: "practice",
+    label: "Practice leadership",
+    blurb:
+      "The director and consultants who set the firm's technical standards and carry its longest client relationships.",
+  },
+  {
+    key: "accounting",
+    label: "Accounting & superannuation",
+    blurb:
+      "Tax, SMSF, audit and bookkeeping — the people who prepare and lodge the work.",
+  },
+  {
+    key: "client-services",
+    label: "Client services & administration",
+    blurb:
+      "Reception, ASIC compliance and the day-to-day admin that keeps more than 200 companies current.",
+  },
+];
+
+export const teamByGroup = (key: TeamGroupKey) =>
+  team.filter((m) => m.group === key);
+
+/** "Nayyar Hayat" → "nayyar-hayat" — the portrait filename under /public/images/team/. */
+export const photoSlug = (name: string) =>
+  name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+
+/** Portrait path for a team member (800×1000, 4:5). */
+export const teamPhoto = (name: string) => `/images/team/${photoSlug(name)}.jpg`;
 
 export const site = {
   phone: "(07) 3810 1000",

@@ -1,11 +1,12 @@
 # Team portraits
 
-Drop the final portraits in this folder using these exact filenames, then
-swap the placeholder in `components/TeamProfileCard.tsx` for the `next/image`
-shown in the comment at the top of that file.
+The firm's studio headshots, cropped to 4:5 (800×1000 JPG) centred on the
+subject. Filenames follow `photoSlug(member.name)` from `lib/data.ts`
+("Nayyar Hayat" → `nayyar-hayat.jpg`), so adding a member to `team` in
+`lib/data.ts` only needs a matching file here.
 
-Format: JPG, 800×1000 (4:5 portrait), consistent framing/background across
-the set.
+Backgrounds are pure white and the cards render the image with
+`mix-blend-multiply` over a light panel, so keep replacements shot on white.
 
 - nayyar-hayat.jpg
 - richard-dinsdale.jpg

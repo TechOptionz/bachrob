@@ -9,8 +9,9 @@ import PageHero from "@/components/PageHero";
 import Reveal from "@/components/service/Reveal";
 import ImagePlaceholder from "@/components/service/ImagePlaceholder";
 import ServicesIndexNav from "@/components/ServicesIndexNav";
+import KeyobSidebarCard from "@/components/partner/KeyobSidebarCard";
 
-import { services, site } from "@/lib/data";
+import { services } from "@/lib/data";
 import { serviceDetails } from "@/lib/services";
 
 export const metadata: Metadata = {
@@ -59,28 +60,16 @@ export default function ServicesPage() {
             the service identically — and the same photo asset serves both. */}
         <section className="section bg-white">
           <div className="shell">
-            <div className="grid gap-12 lg:grid-cols-[250px_minmax(0,1fr)] lg:gap-16">
+            <div className="grid gap-12 lg:grid-cols-[262px_minmax(0,1fr)] lg:gap-16">
               <aside className="hidden lg:block">
                 <div className="sticky top-28">
-                  <div className="eyebrow mb-5 text-[#1E4B8F]">
-                    On this page
-                  </div>
                   <ServicesIndexNav
                     items={services.map((s) => ({
                       slug: s.slug,
                       name: s.name,
                     }))}
+                    promo={<KeyobSidebarCard className="mt-7" />}
                   />
-                  <div className="mt-8 border-t border-[#E5E4E0] pt-6 text-[14px] leading-[1.6] text-[#6B7280]">
-                    Not sure which you need?
-                    <br />
-                    <a
-                      href={site.phoneHref}
-                      className="font-semibold text-[#1E4B8F]"
-                    >
-                      Call {site.phone}
-                    </a>
-                  </div>
                 </div>
               </aside>
 

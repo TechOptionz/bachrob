@@ -16,6 +16,8 @@ import ConsiderationsSection from "@/components/service/ConsiderationsSection";
 import ResourceLinks from "@/components/service/ResourceLinks";
 import RelatedServices from "@/components/service/RelatedServices";
 import ServiceFAQ from "@/components/service/ServiceFAQ";
+import ServiceSubnav from "@/components/service/ServiceSubnav";
+import KeyobCard from "@/components/partner/KeyobCard";
 import ContactCTA from "@/components/ContactCTA";
 
 import { site } from "@/lib/data";
@@ -136,6 +138,25 @@ export default async function ServicePage({
     ],
   };
 
+  /* Jump-link targets for the index bar under the hero. The FAQ section
+     already carries id="faq" internally, so it needs no wrapper. */
+  const anchors: Partial<Record<SectionKey, { id: string; label: string }>> = {
+    intro: { id: "overview", label: "Overview" },
+    helpWith: { id: "what-we-do", label: "What we do" },
+    audience: { id: "who-its-for", label: "Who it's for" },
+    approach: { id: "our-approach", label: "Our approach" },
+    considerations: { id: "considerations", label: "Considerations" },
+    ...(service.resources
+      ? { resources: { id: "resources", label: "Resources" } as const }
+      : {}),
+    faq: { id: "faq", label: "FAQ" },
+  };
+
+  const subnavItems = service.order.flatMap((key) => {
+    const anchor = anchors[key];
+    return anchor ? [anchor] : [];
+  });
+
   const section = (key: SectionKey) => {
     switch (key) {
       case "intro":
@@ -200,7 +221,28 @@ export default async function ServicePage({
 
       <main>
         <ServiceHero name={service.name} {...service.hero} />
-        {service.order.map(section)}
+        <ServiceSubnav items={subnavItems} />
+        {service.order.map((key) => {
+          const rendered = section(key);
+          if (!rendered) return null;
+          const anchor = anchors[key];
+          /* ServiceFAQ sets id="faq" on its own section element. */
+          if (!anchor || key === "faq") return rendered;
+          return (
+            <div key={key} id={anchor.id} className="scroll-mt-24">
+              {rendered}
+            </div>
+          );
+        })}
+
+        {/* KEYOB partner promo — every service page carries the offer once,
+            between the service content and the closing CTA. */}
+        <section className="gutter border-t border-[#E5E4E0] bg-white py-16 md:py-20">
+          <div className="shell">
+            <KeyobCard />
+          </div>
+        </section>
+
         <ContactCTA />
       </main>
 

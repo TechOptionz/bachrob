@@ -1,5 +1,6 @@
 import { site } from "@/lib/data";
 import ContactForm from "./ContactForm";
+import Reveal from "./service/Reveal";
 
 function Detail({
   title,
@@ -25,14 +26,15 @@ export default function Contact() {
   return (
     <section id="contact" className="section scroll-mt-24 bg-cream">
       <div className="shell grid grid-cols-[repeat(auto-fit,minmax(min(340px,100%),1fr))] gap-14">
-        <div>
+        <Reveal variant="left">
           <div className="eyebrow mb-[14px] text-[#1E4B8F]">Get in touch</div>
           <h2 className="m-0 mb-5 font-serif text-[30px] font-normal md:text-[40px]">
             Book a consultation
           </h2>
           <p className="m-0 mb-8 text-[17px] leading-[1.7] text-[#374151]">
             Give us a call, send a message, or drop into the office. We&rsquo;ll
-            get back to you as soon as possible.
+            get back to you as soon as possible — usually within one business
+            day.
           </p>
           <div className="grid gap-[22px]">
             <Detail title="Visit us">
@@ -61,9 +63,11 @@ export default function Contact() {
               </a>
             </Detail>
           </div>
-        </div>
+        </Reveal>
 
-        <ContactForm />
+        <Reveal variant="right" delay={100}>
+          <ContactForm />
+        </Reveal>
       </div>
     </section>
   );

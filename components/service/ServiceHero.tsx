@@ -84,8 +84,27 @@ export default function ServiceHero({
             </div>
           </div>
 
-          <div className="br-rise" style={{ animationDelay: "200ms" }}>
-            <ImagePlaceholder {...image} />
+          <div
+            className="br-rise relative sm:pb-6 sm:pr-4"
+            style={{ animationDelay: "200ms" }}
+          >
+            {/* Offset hairline frame behind the photo — lifts it off the tint
+                without another heavy shadow. */}
+            <span
+              aria-hidden="true"
+              className="absolute bottom-0 right-0 hidden h-[calc(100%-28px)] w-[calc(100%-28px)] border border-[#C8D6EB] sm:block"
+            />
+            <div className="relative">
+              <ImagePlaceholder {...image} />
+              <div className="absolute -bottom-5 left-5 hidden bg-[#16396E] px-5 py-4 shadow-[0_14px_30px_rgba(18,25,42,0.28)] sm:block md:left-7">
+                <div className="font-serif text-[24px] leading-none text-white">
+                  Since 1990
+                </div>
+                <div className="mt-[6px] text-[10.5px] uppercase tracking-[1.8px] text-[#9FB8DC]">
+                  Serving Ipswich &amp; surrounds
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -97,12 +116,18 @@ export default function ServiceHero({
             {highlights.map((item) => (
               <li
                 key={item}
-                className="text-[15.5px] leading-[1.6] text-[#374151]"
+                className="flex gap-3 text-[15.5px] font-medium leading-[1.55] text-[#1B2430]"
               >
-                <span
+                <svg
                   aria-hidden="true"
-                  className="mb-[10px] block h-[3px] w-[26px] bg-[#1E4B8F]"
-                />
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  className="mt-[2px] h-[18px] w-[18px] shrink-0 text-[#1E4B8F]"
+                >
+                  <path d="M4 10.5l4 4 8-9" strokeLinecap="square" />
+                </svg>
                 {item}
               </li>
             ))}

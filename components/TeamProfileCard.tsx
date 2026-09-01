@@ -1,98 +1,103 @@
 "use client";
 
-import { useState } from "react";
-import { initials, type TeamMember } from "@/lib/data";
+import Image from "next/image";
+import { useRef, useState } from "react";
+import { teamPhoto, type TeamMember } from "@/lib/data";
+import TeamProfileModal from "./TeamProfileModal";
 
 /**
- * Full profile card for the /team page: portrait slot on top, then the same
- * name / role / credentials / expandable-bio treatment as the homepage
- * TeamCard, so the two stay visually related.
+ * Compact profile card for the /team page — portrait, name, role and a
+ * two-line teaser. The full profile (credentials, bio, background) lives in
+ * the popup dialog, opened by clicking anywhere on the card.
  *
- * The portrait ships as a styled placeholder. To drop the real photo in,
- * replace the placeholder <div> below with:
+ * Layout is two shapes in one markup pass. Below `sm` the card is a directory
+ * row — a small portrait with the name beside it — because a full-bleed 4:5
+ * portrait on a phone is half a screen of face before the reader learns
+ * anything. From `sm` up the same blocks stack into a portrait-over-text card.
  *
- *   <Image
- *     src={`/images/team/${photoSlug(member.name)}.jpg`}   // 800×1000 (4:5) portrait
- *     alt={member.name}
- *     width={800} height={1000} loading="lazy"
- *     sizes="(max-width: 640px) 100vw, 340px"
- *     className="block h-auto w-full border-b border-[#E5E4E0] object-cover"
- *   />
+ * The portraits are studio headshots on a pure-white backdrop, so the image is
+ * multiplied over a light panel: the backdrop drops out and the subject sits on
+ * the panel rather than on a white rectangle pasted into a white card.
  */
-
-/** "Nayyar Hayat" → "nayyar-hayat", the expected filename under /public/images/team/. */
-export const photoSlug = (name: string) =>
-  name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
-
 export default function TeamProfileCard({ member }: { member: TeamMember }) {
-  const [expanded, setExpanded] = useState(false);
+  const [open, setOpen] = useState(false);
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   return (
-    <div className="flex flex-col border border-[#E5E4E0] bg-white">
-      {/* Replace with an 800×1000 (4:5) professional portrait —
-          /public/images/team/{photoSlug(member.name)}.jpg */}
-      <div
-        data-image-placeholder={`Portrait — ${member.name}`}
-        aria-hidden="true"
-        className="relative flex aspect-[4/5] items-center justify-center overflow-hidden border-b border-[#E5E4E0] bg-[linear-gradient(150deg,#F5F8FC_0%,#F1F3F0_100%)]"
-      >
-        <span className="pointer-events-none absolute left-3 top-3 h-3 w-3 border-l border-t border-[#C8D6EB]" />
-        <span className="pointer-events-none absolute right-3 top-3 h-3 w-3 border-r border-t border-[#C8D6EB]" />
-        <span className="pointer-events-none absolute bottom-3 left-3 h-3 w-3 border-b border-l border-[#C8D6EB]" />
-        <span className="pointer-events-none absolute bottom-3 right-3 h-3 w-3 border-b border-r border-[#C8D6EB]" />
-
-        <div className="px-6 text-center">
-          <div className="mx-auto mb-4 grid h-[64px] w-[64px] place-items-center bg-[#E8EEF7] font-serif text-[22px] text-[#1E4B8F]">
-            {initials(member.name)}
-          </div>
-          <div className="eyebrow text-[10px] tracking-[2.2px] text-[#1E4B8F]">
-            Photo placeholder
-          </div>
-          <div className="mt-2 text-[12px] leading-[1.5] text-[#8A94A6]">
-            /images/team/{photoSlug(member.name)}.jpg · 4:5
-          </div>
-        </div>
-      </div>
-
-      <div className="flex grow flex-col p-[26px]">
-        <div className="font-serif text-[20px] text-[#1B2430]">
-          {member.name}
-        </div>
-        <div className="mt-[2px] text-[13.5px] font-semibold text-[#1E4B8F]">
-          {member.role}
+    <>
+      <article className="br-lift group relative grid h-full grid-cols-[124px_1fr] border border-[#E5E4E0] bg-white hover:border-[#C8D6EB] hover:shadow-[0_22px_48px_-24px_rgba(22,57,110,0.4)] sm:grid-cols-1">
+        {/* 4:5 in the phone's narrow column, square once the portrait goes
+            full-width. Cropped from the top so the headroom survives and the
+            trim comes off the shoulders. */}
+        <div className="relative aspect-[4/5] overflow-hidden bg-[#F1F3F6] sm:aspect-square">
+          <Image
+            src={teamPhoto(member.name)}
+            alt={member.name}
+            width={800}
+            height={1000}
+            loading="lazy"
+            sizes="(max-width: 639px) 124px, (max-width: 1023px) 50vw, 360px"
+            className="br-photo h-full w-full object-cover object-top mix-blend-multiply"
+            unoptimized
+          />
         </div>
 
-        {member.creds && (
-          <div className="mt-[10px] text-[13px] uppercase tracking-[0.5px] text-[#4B5563]">
-            {member.creds}
-          </div>
-        )}
+        {/* Identity — beside the portrait on a phone, under it from sm up. */}
+        <div className="flex min-w-0 flex-col justify-center px-5 py-4 sm:px-7 sm:pb-0 sm:pt-7">
+          <span
+            aria-hidden="true"
+            className="mb-[14px] hidden h-[2px] w-7 bg-[#1E4B8F] transition-[width] duration-500 group-hover:w-12 sm:block"
+          />
 
-        <p className="m-0 mt-3 text-[15px] leading-[1.65] text-[#374151]">
-          {member.bio}
-        </p>
+          <h3 className="m-0 font-serif text-[18px] font-normal leading-[1.25] text-[#1B2430] sm:text-[21px]">
+            {member.name}
+          </h3>
+          <p className="m-0 mt-[3px] text-[13px] font-semibold leading-[1.4] text-[#1E4B8F] sm:text-[13.5px]">
+            {member.role}
+          </p>
+        </div>
 
-        {member.more && (
-          <>
-            {expanded && (
-              <p className="m-0 mt-[10px] text-[15px] leading-[1.65] text-[#374151]">
-                {member.more}
-              </p>
-            )}
-            <button
-              type="button"
-              onClick={() => setExpanded((v) => !v)}
-              aria-expanded={expanded}
-              className="mt-3 cursor-pointer self-start border-none bg-transparent p-0 font-sans text-[14px] font-bold text-[#1E4B8F]"
-            >
-              {expanded ? "Show less" : "Read more"}
-            </button>
-          </>
-        )}
-      </div>
-    </div>
+        {/* Teaser — spans both columns on a phone, continues the stack from
+            sm up. Clamped to two lines; the popup carries the full story. */}
+        <div className="col-span-2 flex grow flex-col px-5 pb-6 sm:col-span-1 sm:px-7 sm:pb-7">
+          <p className="m-0 mt-4 line-clamp-2 text-[15px] leading-[1.7] text-[#374151]">
+            {member.bio}
+          </p>
+
+          <span
+            aria-hidden="true"
+            className="mt-auto flex items-center gap-[6px] pt-5 font-sans text-[12px] font-semibold uppercase tracking-[1.1px] text-[#1E4B8F] group-hover:underline"
+          >
+            View profile
+            <span className="inline-block text-[15px] leading-none transition-transform duration-300 group-hover:translate-x-[3px]">
+              &rsaquo;
+            </span>
+          </span>
+        </div>
+
+        {/* One stretched button makes the whole card the click target without
+            nesting interactive elements. */}
+        <button
+          ref={triggerRef}
+          type="button"
+          onClick={() => setOpen(true)}
+          aria-haspopup="dialog"
+          aria-expanded={open}
+          className="absolute inset-0 z-10 cursor-pointer border-none bg-transparent p-0"
+        >
+          <span className="sr-only">View profile — {member.name}</span>
+        </button>
+      </article>
+
+      {open && (
+        <TeamProfileModal
+          member={member}
+          onClose={() => {
+            setOpen(false);
+            triggerRef.current?.focus();
+          }}
+        />
+      )}
+    </>
   );
 }

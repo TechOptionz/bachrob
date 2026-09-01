@@ -9,7 +9,10 @@ import PageHero from "@/components/PageHero";
 import SectionShell, { SectionHeading } from "@/components/service/SectionShell";
 import Reveal from "@/components/service/Reveal";
 import ImagePlaceholder from "@/components/service/ImagePlaceholder";
+import ResourceCard from "@/components/ResourceCard";
+import KeyobCard from "@/components/partner/KeyobCard";
 import { resources } from "@/lib/data";
+import { articles } from "@/lib/articles";
 
 export const metadata: Metadata = {
   title: "Insights & Resources",
@@ -99,42 +102,6 @@ const categories = [
         <path d="M22 26.5v.5" />
       </>
     ),
-  },
-];
-
-/* CLIENT CONTENT REQUIRED: these are sample article stubs demonstrating the
-   layout. When real articles are written, give each one a page and swap the
-   "Coming soon" spans below for <Link>s to it. */
-const articles = [
-  {
-    category: "Business insights",
-    title: "Preparing your business for growth",
-    desc: "The structures, systems and conversations worth having before you scale — so growth builds value instead of stress.",
-  },
-  {
-    category: "Financial guidance",
-    title: "Understanding business cash flow",
-    desc: "Profit and cash are not the same thing. A plain-language look at why healthy businesses still run short, and how to see it coming.",
-  },
-  {
-    category: "Tax & compliance",
-    title: "Key tax planning considerations",
-    desc: "Timing, deductions and structure choices to review with your accountant well before 30 June — not after.",
-  },
-  {
-    category: "Financial guidance",
-    title: "Financial planning for business owners",
-    desc: "Your business and your personal finances are deeply linked. How owners can plan for both without doubling the work.",
-  },
-  {
-    category: "Tax & compliance",
-    title: "Common compliance mistakes to avoid",
-    desc: "The record-keeping, lodgement and superannuation slip-ups we see most often — and the simple habits that prevent them.",
-  },
-  {
-    category: "Business insights",
-    title: "Building a stronger business strategy",
-    desc: "A practical framework for stepping back from the day-to-day and deciding where your business goes next.",
   },
 ];
 
@@ -238,12 +205,13 @@ export default function ResourcesPage() {
                 cash flow fund the step up, and what will the ATO expect of the
                 bigger version of your business?
               </p>
-              {/* CLIENT CONTENT REQUIRED: swap for
-                  <Link href="/resources/preparing-your-business-for-growth" …>
-                  once the article page exists. */}
-              <span className="inline-block cursor-default border border-[#D8DCE2] bg-white px-7 py-[14px] text-[16px] font-semibold text-[#6B7280]">
-                Full article coming soon
-              </span>
+              <Link
+                href="/resources/preparing-your-business-for-growth"
+                className="inline-block bg-[#1E4B8F] px-7 py-[14px] text-[16px] font-bold text-white transition-colors hover:bg-[#16396E] hover:text-white"
+              >
+                Read the full article{" "}
+                <span aria-hidden="true">&rarr;</span>
+              </Link>
             </Reveal>
           </div>
         </SectionShell>
@@ -257,28 +225,41 @@ export default function ResourcesPage() {
           />
           <div className="mt-12 grid grid-cols-[repeat(auto-fill,minmax(min(300px,100%),1fr))] gap-5">
             {articles.map((a, i) => (
-              <Reveal key={a.title} delay={(i % 3) * 60} className="h-full">
-                <article className="flex h-full flex-col border border-[#E5E4E0] bg-white px-7 pb-7 pt-7">
+              <Reveal key={a.slug} delay={(i % 3) * 60} className="h-full">
+                <Link
+                  href={`/resources/${a.slug}`}
+                  className="group flex h-full flex-col border border-[#E5E4E0] bg-white px-7 pb-7 pt-7 text-[#1B2430] transition-colors hover:bg-[#F5F8FC] hover:text-[#1B2430]"
+                >
                   <div className="eyebrow mb-4 text-[11px] tracking-[2.4px] text-[#1E4B8F]">
                     {a.category}
                   </div>
-                  <h3 className="m-0 mb-[10px] font-serif text-[20px] font-normal leading-[1.35] text-[#1B2430]">
+                  <h3 className="m-0 mb-[10px] font-serif text-[20px] font-normal leading-[1.35] transition-colors group-hover:text-[#1E4B8F]">
                     {a.title}
                   </h3>
                   <p className="m-0 mb-6 text-[15.5px] leading-[1.6] text-[#374151]">
                     {a.desc}
                   </p>
-                  {/* CLIENT CONTENT REQUIRED: replace with
-                      <Link href={`/resources/${slug}`}>Read more →</Link>
-                      when the article is published. */}
-                  <span className="mt-auto text-[14px] font-semibold text-[#8A94A6]">
-                    Coming soon
+                  <span className="mt-auto text-[14px] font-semibold text-[#1E4B8F]">
+                    Read article{" "}
+                    <span
+                      aria-hidden="true"
+                      className="inline-block transition-transform duration-300 group-hover:translate-x-1"
+                    >
+                      &rarr;
+                    </span>
                   </span>
-                </article>
+                </Link>
               </Reveal>
             ))}
           </div>
         </SectionShell>
+
+        {/* KEYOB partner promo — between our own guides and the ATO tools. */}
+        <section className="gutter border-t border-[#E5E4E0] bg-white py-16 md:py-20">
+          <div className="shell">
+            <KeyobCard body="Good advice is only half the job — the other half is systems that put it into practice. Our technology partner builds them, at a preferred rate for Bachmann Robinson clients." />
+          </div>
+        </section>
 
         {/* E. ATO quick links — the trusted external tools, same treatment as
             the homepage resources band. */}
@@ -292,19 +273,7 @@ export default function ResourcesPage() {
           <div className="mt-10 grid grid-cols-[repeat(auto-fill,minmax(min(250px,100%),1fr))] gap-[14px]">
             {resources.map((r, i) => (
               <Reveal key={r.name} delay={Math.min(i, 5) * 45} className="h-full">
-                <a
-                  href={r.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block h-full border border-white/25 px-5 py-[18px] text-white transition-colors hover:border-white hover:bg-white/[0.06] hover:text-white"
-                >
-                  <div className="mb-[6px] text-[15.5px] font-bold">
-                    {r.name} ↗
-                  </div>
-                  <div className="text-[14.5px] leading-[1.5] text-[#D5E0F0]">
-                    {r.desc}
-                  </div>
-                </a>
+                <ResourceCard resource={r} tone="navy" />
               </Reveal>
             ))}
           </div>
