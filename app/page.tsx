@@ -11,10 +11,12 @@ import TeamPreview from "@/components/home/TeamPreview";
 import Resources from "@/components/Resources";
 import KeyobStrip from "@/components/partner/KeyobStrip";
 import KeyobBand from "@/components/partner/KeyobBand";
+import GoogleReviews from "@/components/home/GoogleReviews";
 import Contact from "@/components/Contact";
 import ContactCTA from "@/components/ContactCTA";
 import Footer from "@/components/Footer";
 import { services, site } from "@/lib/data";
+import { googleReviews } from "@/lib/reviews";
 
 /**
  * Search engines read the firm's details from here rather than inferring them
@@ -54,6 +56,16 @@ const structuredData = {
       itemOffered: { "@type": "Service", name: s.name, description: s.desc },
     })),
   },
+  // Only named reviews actually rendered on the page — the aggregate count on
+  // Google isn't published anywhere machine-readable, so no AggregateRating.
+  review: googleReviews.reviews
+    .filter((r) => !r.anonymous)
+    .map((r) => ({
+      "@type": "Review",
+      author: { "@type": "Person", name: r.name },
+      reviewRating: { "@type": "Rating", ratingValue: r.rating, bestRating: 5 },
+      reviewBody: r.text,
+    })),
 };
 
 export default function Home() {
@@ -80,8 +92,10 @@ export default function Home() {
       <div className="relative z-10 -mt-16 overflow-clip rounded-t-[50%_48px] bg-cream shadow-[0_-26px_44px_-10px_rgba(18,25,42,0.28)] md:rounded-t-[50%_72px]">
         <main>
           {/* Tone rhythm below the hero alternates light/dark deliberately:
-              cream · cream · white · stone · navy · white · stone · cream ·
-              navy. Every band change is also a change of subject. */}
+              cream · cream · white · stone · navy · white · stone · navy ·
+              white · cream · cream. Every band change is also a change of
+              subject; the page then ends with the footer's dark curve closing
+              over the light CTA band. */}
           <CredentialsStrip />
           <Services />
           <WhyUs />
@@ -90,6 +104,7 @@ export default function Home() {
           <TeamPreview />
           <Resources />
           <KeyobBand />
+          <GoogleReviews />
           <Contact />
           <ContactCTA />
         </main>

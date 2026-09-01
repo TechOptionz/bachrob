@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { site } from "@/lib/data";
+
 import TopBar from "@/components/TopBar";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -150,9 +152,19 @@ export default function AboutPage() {
                 focused on one thing: getting the best possible outcome for our
                 clients by leaving no stone unturned.
               </p>
-              <Link href="/team" className="rule-link">
-                Meet the team →
-              </Link>
+              <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
+                <Link href="/team" className="rule-link">
+                  Meet the team →
+                </Link>
+                <a
+                  href={site.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rule-link"
+                >
+                  Follow us on Facebook →
+                </a>
+              </div>
             </Reveal>
 
             <Reveal delay={80}>

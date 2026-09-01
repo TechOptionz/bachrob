@@ -238,4 +238,5 @@ export const site = {
   addressLine: "Level 1, 265 Brisbane St, Ipswich QLD",
   hours: "Mon–Fri, 9am–5pm",
   maps: "https://goo.gl/maps/jvh5zfBbDMm",
+  facebook: "https://www.facebook.com/BachmannRobinson/",
 };

@@ -12,8 +12,13 @@ const exploreLinks = [
 ];
 
 export default function Footer() {
+  // The curve depth must equal the negative top margin: the arc then rises
+  // through the whole overlap and its apex lands exactly on the section
+  // boundary, so the navy closes flush against the light band above with no
+  // pale gap (no soft shadow here for the same reason — its haze reads as
+  // the door left ajar).
   return (
-    <footer className="gutter relative -mt-12 rounded-t-[50%_48px] bg-[#12192A] pb-10 pt-20 text-[#8A94A6] md:pt-28 shadow-[0_-26px_44px_-10px_rgba(18,25,42,0.25)] md:-mt-[72px] md:rounded-t-[50%_72px]">
+    <footer className="gutter relative -mt-16 rounded-t-[50%_64px] bg-[#12192A] pb-10 pt-24 text-[#8A94A6] md:-mt-[110px] md:rounded-t-[50%_110px] md:pt-36">
       <div className="shell">
         <div className="grid gap-x-10 gap-y-12 border-b border-white/10 pb-12 md:grid-cols-2 lg:grid-cols-[1.35fr_1.1fr_0.85fr_1fr]">
           {/* Brand */}
@@ -29,15 +34,15 @@ export default function Footer() {
                 />
               </span>
               <div>
-                <div className="font-serif text-[16px] tracking-[0.5px] text-white">
+                <div className="font-serif text-[18px] tracking-[0.5px] text-white">
                   BACHMANN ROBINSON
                 </div>
-                <div className="mt-[2px] text-[9.5px] uppercase tracking-[1.6px] text-[#8A94A6]">
+                <div className="mt-[2px] text-[10.5px] uppercase tracking-[1.6px] text-[#8A94A6]">
                   Accountants, Auditors &amp; Tax Agent
                 </div>
               </div>
             </div>
-            <p className="text-[15.5px] leading-[1.7]">
+            <p className="text-[16.5px] leading-[1.7]">
               Accountants, auditors &amp; tax agents serving Ipswich and
               surrounds since 1990. Registered tax agents with a dedicated
               SMSF department, backed by an ASIC licence for superannuation
@@ -48,18 +53,36 @@ export default function Footer() {
                 (badge) => (
                   <span
                     key={badge}
-                    className="rounded-full border border-white/10 px-3 py-1 text-[12px] uppercase tracking-[1px] text-[#B4BECE]"
+                    className="rounded-full border border-white/10 px-3 py-1 text-[13px] uppercase tracking-[1px] text-[#B4BECE]"
                   >
                     {badge}
                   </span>
                 )
               )}
             </div>
+            <a
+              href={site.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex items-center gap-[10px] text-[15px] text-[#B4BECE] transition-colors hover:text-white"
+            >
+              <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                  className="h-4 w-4"
+                >
+                  <path d="M13.4 21v-8.2h2.75l.41-3.2H13.4V7.56c0-.93.26-1.56 1.59-1.56h1.69V3.14C16.39 3.1 15.38 3 14.2 3c-2.43 0-4.1 1.49-4.1 4.22v2.38H7.34v3.2h2.76V21h3.3z" />
+                </svg>
+              </span>
+              Follow us on Facebook
+            </a>
           </div>
 
           {/* Services */}
-          <div className="text-[15.5px]">
-            <div className="mb-3 text-[13px] font-bold uppercase tracking-[1.4px] text-white">
+          <div className="text-[16.5px]">
+            <div className="mb-3 text-[14px] font-bold uppercase tracking-[1.4px] text-white">
               Services
             </div>
             <ul className="grid gap-[9px] leading-[1.5]">
@@ -85,8 +108,8 @@ export default function Footer() {
           </div>
 
           {/* Explore */}
-          <div className="text-[15.5px]">
-            <div className="mb-3 text-[13px] font-bold uppercase tracking-[1.4px] text-white">
+          <div className="text-[16.5px]">
+            <div className="mb-3 text-[14px] font-bold uppercase tracking-[1.4px] text-white">
               Explore
             </div>
             <ul className="grid gap-[9px] leading-[1.5]">
@@ -104,8 +127,8 @@ export default function Footer() {
           </div>
 
           {/* Get in touch */}
-          <div className="text-[15.5px] leading-[1.7]">
-            <div className="mb-3 text-[13px] font-bold uppercase tracking-[1.4px] text-white">
+          <div className="text-[16.5px] leading-[1.7]">
+            <div className="mb-3 text-[14px] font-bold uppercase tracking-[1.4px] text-white">
               Get in Touch
             </div>
             <div className="grid gap-4">
@@ -153,7 +176,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="grid gap-3 pt-7 text-[14px] leading-[1.7]">
+        <div className="grid gap-3 pt-7 text-[15px] leading-[1.7]">
           <div className="font-semibold text-[#B4BECE]">
             Liability limited by a scheme approved under Professional Standards
             Legislation.
@@ -180,7 +203,7 @@ export default function Footer() {
               © {new Date().getFullYear()} Bachmann Robinson. All rights
               reserved.
             </span>
-            <span className="text-[13px]">
+            <span className="text-[14px]">
               Accountants, Auditors &amp; Tax Agents — Ipswich, QLD
             </span>
           </div>
