@@ -1,20 +1,22 @@
+import fs from "node:fs";
+import path from "node:path";
+import Image from "next/image";
 import type { ImageSpec } from "@/lib/services";
 
 /**
- * Stand-in for artwork that has not been supplied yet.
+ * Image slot with a built-in stand-in.
  *
- * It reserves the exact box a real photograph will occupy (so nothing reflows
- * when the images land) and carries the brief for whoever sources them. To
- * swap one out, replace this element with a next/image, keeping `alt` and the
- * same aspect ratio:
+ * If a file exists at /public/images/generated/<slug-of-label>.jpg it is
+ * rendered as the real image (cropped to the spec's aspect ratio); otherwise
+ * the styled placeholder ships instead. So swapping any image on the site is
+ * just replacing that file — no code changes:
  *
- *   <Image
- *     src="/assets/services/income-tax-hero.webp"
- *     alt="Accountant and client reviewing tax documents together"
- *     width={1200} height={900} loading="lazy"
- *     sizes="(max-width: 900px) 100vw, 520px"
- *     className="block h-auto w-full"
- *   />
+ *   e.g. label "Income Tax Returns — Hero"
+ *      → /public/images/generated/income-tax-returns-hero.jpg
+ *
+ * To use a different location or fine-tuned art direction for one slot,
+ * replace the element at the call site with a next/image, keeping `alt` and
+ * the same aspect ratio.
  */
 
 const ratios: Record<ImageSpec["aspectRatio"], string> = {
@@ -26,6 +28,13 @@ const ratios: Record<ImageSpec["aspectRatio"], string> = {
   "1:1": "1 / 1",
 };
 
+/** "Income Tax Returns — Hero" → "income-tax-returns-hero" */
+export const imageSlug = (label: string) =>
+  label
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+
 export default function ImagePlaceholder({
   label,
   suggestedImage,
@@ -33,6 +42,25 @@ export default function ImagePlaceholder({
   aspectRatio,
   className = "",
 }: ImageSpec & { className?: string }) {
+  const src = `/images/generated/${imageSlug(label)}.jpg`;
+  const hasImage = fs.existsSync(path.join(process.cwd(), "public", src));
+
+  if (hasImage) {
+    return (
+      <figure className={`m-0 ${className}`}>
+        <Image
+          src={src}
+          alt={alt}
+          width={1024}
+          height={1024}
+          sizes="(max-width: 900px) 100vw, 620px"
+          className="block w-full object-cover shadow-[0_20px_50px_rgba(22,57,110,0.16)]"
+          style={{ aspectRatio: ratios[aspectRatio] ?? "4 / 3" }}
+        />
+      </figure>
+    );
+  }
+
   return (
     <figure
       data-image-placeholder={label}

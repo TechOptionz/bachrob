@@ -100,7 +100,7 @@ export default function ServicesPage() {
                       }`}
                     >
                       <div
-                        className={`grid items-center gap-9 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)] lg:gap-14 ${
+                        className={`grid items-center gap-9 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.92fr)] lg:gap-14 ${
                           reversed ? "lg:[direction:rtl]" : ""
                         }`}
                       >

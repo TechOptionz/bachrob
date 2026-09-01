@@ -39,7 +39,7 @@ export default function ServiceHero({
           />
         </div>
 
-        <div className="mt-8 grid items-center gap-10 md:mt-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
+        <div className="mt-8 grid items-center gap-10 md:mt-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-16">
           <div>
             <div
               className="br-rise eyebrow mb-5 text-[#1E4B8F]"
