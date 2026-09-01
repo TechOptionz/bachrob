@@ -50,7 +50,7 @@ export default function ContactForm() {
       <div className="border border-[#E5E4E0] bg-white p-9">
         <div className="px-5 py-10 text-center">
           <div className="mb-3 font-serif text-[24px]">Thank you</div>
-          <p className="m-0 text-[15.5px] leading-[1.6] text-[#4B5563]">
+          <p className="m-0 text-[16px] leading-[1.6] text-[#374151]">
             Your message has been received. We&rsquo;ll get back to you as soon
             as possible — usually within one business day.
           </p>

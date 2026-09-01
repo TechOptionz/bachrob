@@ -127,24 +127,24 @@ export default function AboutPage() {
           <div className="grid grid-cols-[repeat(auto-fit,minmax(min(340px,100%),1fr))] items-center gap-14">
             <Reveal>
               <div className="eyebrow mb-[14px] text-[#1E4B8F]">Who we are</div>
-              <h2 className="m-0 mb-5 font-serif text-[26px] font-normal leading-[1.25] text-pretty md:text-[34px]">
+              <h2 className="m-0 mb-5 font-serif text-[30px] font-normal leading-[1.2] text-pretty md:text-[38px]">
                 Three decades of looking after Ipswich
               </h2>
-              <p className="m-0 mb-[18px] max-w-[560px] text-[16.5px] leading-[1.7] text-[#374151]">
+              <p className="m-0 mb-[18px] max-w-[560px] text-[17px] leading-[1.7] text-[#374151]">
                 The practice was acquired by Russell Bachmann in 1990 and
                 rebadged Bachmann Robinson in 1997. Today, under owner and
                 director Nayyar Hayat, the whole Ipswich team remains dedicated
                 to the same idea the firm was built on: optimum service and
                 healthy, lasting relationships with our clients.
               </p>
-              <p className="m-0 mb-[18px] max-w-[560px] text-[16.5px] leading-[1.7] text-[#374151]">
+              <p className="m-0 mb-[18px] max-w-[560px] text-[17px] leading-[1.7] text-[#374151]">
                 We handle the full breadth of accounting and taxation work —
                 from simple individual returns to business structures, rental
                 properties and defence personnel. As a licensed ASIC
                 representative for super advice, we also run a dedicated
                 department for the administration of Self-Managed Super Funds.
               </p>
-              <p className="m-0 mb-7 max-w-[560px] text-[16.5px] leading-[1.7] text-[#374151]">
+              <p className="m-0 mb-7 max-w-[560px] text-[17px] leading-[1.7] text-[#374151]">
                 Whatever the engagement, our experienced and friendly staff are
                 focused on one thing: getting the best possible outcome for our
                 clients by leaving no stone unturned.
@@ -189,10 +189,10 @@ export default function AboutPage() {
                   >
                     {item.icon}
                   </svg>
-                  <h3 className="m-0 mb-[10px] font-serif text-[19px] font-normal leading-[1.35] text-[#1B2430]">
+                  <h3 className="m-0 mb-[10px] font-serif text-[20px] font-normal leading-[1.35] text-[#1B2430]">
                     {item.title}
                   </h3>
-                  <p className="m-0 text-[15px] leading-[1.6] text-[#4B5563]">
+                  <p className="m-0 text-[15.5px] leading-[1.6] text-[#374151]">
                     {item.desc}
                   </p>
                 </div>
@@ -216,10 +216,10 @@ export default function AboutPage() {
                   aria-hidden="true"
                   className="mb-5 block h-[3px] w-[34px] bg-[#9FB8DC]"
                 />
-                <h3 className="m-0 mb-3 font-serif text-[22px] font-normal text-white">
+                <h3 className="m-0 mb-3 font-serif text-[24px] font-normal text-white">
                   Our mission
                 </h3>
-                <p className="m-0 text-[15.5px] leading-[1.7] text-[#C8D6EB]">
+                <p className="m-0 text-[16px] leading-[1.7] text-[#D5E0F0]">
                   To provide optimum customer service and thorough, practical
                   accounting and taxation advice — building healthy, lasting
                   relationships that help our clients keep more of what they
@@ -233,10 +233,10 @@ export default function AboutPage() {
                   aria-hidden="true"
                   className="mb-5 block h-[3px] w-[34px] bg-[#9FB8DC]"
                 />
-                <h3 className="m-0 mb-3 font-serif text-[22px] font-normal text-white">
+                <h3 className="m-0 mb-3 font-serif text-[24px] font-normal text-white">
                   Our vision
                 </h3>
-                <p className="m-0 text-[15.5px] leading-[1.7] text-[#C8D6EB]">
+                <p className="m-0 text-[16px] leading-[1.7] text-[#D5E0F0]">
                   To remain the firm Ipswich individuals, businesses and
                   self-managed super funds call first — trusted across
                   generations for creativity, personality and commitment in
@@ -261,10 +261,10 @@ export default function AboutPage() {
                     aria-hidden="true"
                     className="mb-4 block h-[3px] w-[26px] bg-[#1E4B8F]"
                   />
-                  <h3 className="m-0 mb-[10px] font-serif text-[19px] font-normal leading-[1.35] text-[#1B2430]">
+                  <h3 className="m-0 mb-[10px] font-serif text-[20px] font-normal leading-[1.35] text-[#1B2430]">
                     {item.title}
                   </h3>
-                  <p className="m-0 text-[15.5px] leading-[1.65] text-[#4B5563]">
+                  <p className="m-0 text-[16px] leading-[1.65] text-[#374151]">
                     {item.desc}
                   </p>
                 </div>
@@ -273,7 +273,7 @@ export default function AboutPage() {
           </div>
           <Reveal>
             <div className="mt-12 flex flex-wrap items-center gap-5">
-              <span className="text-[16px] text-[#4B5563]">
+              <span className="text-[16px] text-[#374151]">
                 See what we can do for you.
               </span>
               <Link href="/services" className="rule-link">

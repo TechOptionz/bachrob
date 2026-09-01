@@ -7,10 +7,10 @@ export default function Team() {
     <section id="team" className="section scroll-mt-24 bg-cream">
       <div className="shell">
         <div className="eyebrow mb-[14px] text-[#1E4B8F]">Our people</div>
-        <h2 className="m-0 mb-3 font-serif text-[28px] font-normal md:text-[36px]">
+        <h2 className="m-0 mb-3 font-serif text-[30px] font-normal md:text-[40px]">
           Meet the team
         </h2>
-        <p className="m-0 mb-12 max-w-[640px] text-[17px] leading-[1.6] text-[#4B5563]">
+        <p className="m-0 mb-12 max-w-[640px] text-[17.5px] leading-[1.65] text-[#374151]">
           The knowledge and insights to uncover opportunities — and the
           commitment to see them through.
         </p>

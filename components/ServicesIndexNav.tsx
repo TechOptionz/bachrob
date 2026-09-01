@@ -57,7 +57,7 @@ export default function ServicesIndexNav({
                 className={`-ml-px flex items-baseline gap-3 border-l-2 py-[9px] pl-5 text-[14.5px] leading-[1.4] transition-colors ${
                   isActive
                     ? "border-[#1E4B8F] font-semibold text-[#1E4B8F]"
-                    : "border-transparent text-[#4B5563] hover:text-[#1E4B8F]"
+                    : "border-transparent text-[#374151] hover:text-[#1E4B8F]"
                 }`}
               >
                 <span

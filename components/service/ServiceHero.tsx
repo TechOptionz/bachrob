@@ -48,19 +48,19 @@ export default function ServiceHero({
               {eyebrow}
             </div>
             <h1
-              className="br-rise m-0 mb-5 font-serif text-[32px] font-normal leading-[1.14] text-pretty text-[#1B2430] sm:text-[40px] md:text-[46px]"
+              className="br-rise m-0 mb-5 font-serif text-[36px] font-normal leading-[1.1] text-pretty text-[#1B2430] sm:text-[46px] md:text-[54px]"
               style={{ animationDelay: "110ms" }}
             >
               {heading}
             </h1>
             <p
-              className="br-rise m-0 mb-6 max-w-[560px] font-serif text-[19px] leading-[1.5] text-[#1E4B8F] md:text-[21px]"
+              className="br-rise m-0 mb-6 max-w-[560px] font-serif text-[20px] leading-[1.5] text-[#1E4B8F] md:text-[22px]"
               style={{ animationDelay: "160ms" }}
             >
               {tagline}
             </p>
             <p
-              className="br-rise m-0 mb-9 max-w-[580px] text-[16.5px] leading-[1.7] text-[#374151] md:text-[17px]"
+              className="br-rise m-0 mb-9 max-w-[580px] text-[17px] leading-[1.7] text-[#374151] md:text-[17px]"
               style={{ animationDelay: "210ms" }}
             >
               {intro}
@@ -97,7 +97,7 @@ export default function ServiceHero({
             {highlights.map((item) => (
               <li
                 key={item}
-                className="text-[15px] leading-[1.55] text-[#374151]"
+                className="text-[15.5px] leading-[1.6] text-[#374151]"
               >
                 <span
                   aria-hidden="true"

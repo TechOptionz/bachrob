@@ -185,10 +185,10 @@ export default function ResourcesPage() {
                   >
                     {c.icon}
                   </svg>
-                  <h3 className="m-0 mb-[10px] font-serif text-[19px] font-normal transition-colors group-hover:text-[#1E4B8F]">
+                  <h3 className="m-0 mb-[10px] font-serif text-[20px] font-normal transition-colors group-hover:text-[#1E4B8F]">
                     {c.title}
                   </h3>
-                  <p className="m-0 mb-6 text-[15px] leading-[1.55] text-[#4B5563]">
+                  <p className="m-0 mb-6 text-[15.5px] leading-[1.6] text-[#374151]">
                     {c.desc}
                   </p>
                   <span className="mt-auto text-[14px] font-semibold text-[#1E4B8F]">
@@ -223,16 +223,16 @@ export default function ResourcesPage() {
               <div className="eyebrow mb-[14px] text-[#1E4B8F]">
                 Featured · Business insights
               </div>
-              <h2 className="m-0 mb-5 font-serif text-[26px] font-normal leading-[1.25] text-pretty md:text-[32px]">
+              <h2 className="m-0 mb-5 font-serif text-[30px] font-normal leading-[1.2] text-pretty md:text-[38px]">
                 Preparing your business for growth
               </h2>
-              <p className="m-0 mb-4 max-w-[560px] text-[16.5px] leading-[1.7] text-[#374151]">
+              <p className="m-0 mb-4 max-w-[560px] text-[17px] leading-[1.7] text-[#374151]">
                 Growth changes everything — your structure, your cash flow, your
                 tax position and the systems you rely on. The businesses that
                 scale well are the ones that prepare before the growth arrives,
                 not after.
               </p>
-              <p className="m-0 mb-8 max-w-[560px] text-[16.5px] leading-[1.7] text-[#374151]">
+              <p className="m-0 mb-8 max-w-[560px] text-[17px] leading-[1.7] text-[#374151]">
                 In this guide we walk through the questions worth answering with
                 your accountant first: is your structure still right, can your
                 cash flow fund the step up, and what will the ATO expect of the
@@ -262,10 +262,10 @@ export default function ResourcesPage() {
                   <div className="eyebrow mb-4 text-[11px] tracking-[2.4px] text-[#1E4B8F]">
                     {a.category}
                   </div>
-                  <h3 className="m-0 mb-[10px] font-serif text-[19px] font-normal leading-[1.35] text-[#1B2430]">
+                  <h3 className="m-0 mb-[10px] font-serif text-[20px] font-normal leading-[1.35] text-[#1B2430]">
                     {a.title}
                   </h3>
-                  <p className="m-0 mb-6 text-[15px] leading-[1.6] text-[#4B5563]">
+                  <p className="m-0 mb-6 text-[15.5px] leading-[1.6] text-[#374151]">
                     {a.desc}
                   </p>
                   {/* CLIENT CONTENT REQUIRED: replace with
@@ -301,7 +301,7 @@ export default function ResourcesPage() {
                   <div className="mb-[6px] text-[15.5px] font-bold">
                     {r.name} ↗
                   </div>
-                  <div className="text-[13.5px] leading-[1.45] text-[#C8D6EB]">
+                  <div className="text-[14.5px] leading-[1.5] text-[#D5E0F0]">
                     {r.desc}
                   </div>
                 </a>

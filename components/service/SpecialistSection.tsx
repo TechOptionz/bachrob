@@ -51,11 +51,11 @@ export default function SpecialistSection({
               {person.role}
             </div>
             {person.creds ? (
-              <div className="mt-2 text-[14.5px] leading-[1.6] text-[#4B5563]">
+              <div className="mt-2 text-[15px] leading-[1.65] text-[#374151]">
                 {person.creds}
               </div>
             ) : null}
-            <Link href="/#team" className="rule-link mt-5 inline-block">
+            <Link href="/team" className="rule-link mt-5 inline-block">
               Meet the team &rarr;
             </Link>
           </div>

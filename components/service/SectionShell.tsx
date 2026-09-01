@@ -62,7 +62,7 @@ export function SectionHeading({
         </div>
       ) : null}
       <h2
-        className={`m-0 font-serif text-[26px] font-normal leading-[1.25] text-pretty md:text-[34px] ${
+        className={`m-0 font-serif text-[30px] font-normal leading-[1.2] text-pretty md:text-[38px] ${
           dark ? "text-white" : "text-[#1B2430]"
         }`}
       >
@@ -70,9 +70,9 @@ export function SectionHeading({
       </h2>
       {intro ? (
         <p
-          className={`m-0 mt-5 max-w-[680px] text-[16.5px] leading-[1.7] ${
+          className={`m-0 mt-5 max-w-[680px] text-[17px] leading-[1.7] ${
             align === "center" ? "mx-auto" : ""
-          } ${dark ? "text-[#C8D6EB]" : "text-[#4B5563]"}`}
+          } ${dark ? "text-[#D5E0F0]" : "text-[#374151]"}`}
         >
           {intro}
         </p>

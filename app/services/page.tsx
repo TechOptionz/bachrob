@@ -116,13 +116,13 @@ export default function ServicesPage() {
                               className="block h-[3px] w-[34px] self-center bg-[#1E4B8F]"
                             />
                           </div>
-                          <h2 className="m-0 mb-3 font-serif text-[24px] font-normal leading-[1.25] text-pretty text-[#1B2430] md:text-[30px]">
+                          <h2 className="m-0 mb-3 font-serif text-[28px] font-normal leading-[1.2] text-pretty text-[#1B2430] md:text-[36px]">
                             {s.name}
                           </h2>
-                          <p className="m-0 mb-4 max-w-[540px] font-serif text-[17.5px] leading-[1.5] text-[#1E4B8F]">
+                          <p className="m-0 mb-4 max-w-[540px] font-serif text-[18.5px] leading-[1.5] text-[#1E4B8F]">
                             {detail.hero.tagline}
                           </p>
-                          <p className="m-0 mb-6 max-w-[540px] text-[16px] leading-[1.7] text-[#374151]">
+                          <p className="m-0 mb-6 max-w-[540px] text-[16.5px] leading-[1.7] text-[#374151]">
                             {s.desc}
                           </p>
 
@@ -131,7 +131,7 @@ export default function ServicesPage() {
                               {detail.hero.highlights.map((h) => (
                                 <li
                                   key={h}
-                                  className="flex items-baseline gap-3 text-[15px] leading-[1.55] text-[#4B5563]"
+                                  className="flex items-baseline gap-3 text-[15.5px] leading-[1.6] text-[#374151]"
                                 >
                                   <span
                                     aria-hidden="true"

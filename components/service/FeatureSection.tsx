@@ -35,7 +35,7 @@ export default function FeatureSection({
             {eyebrow}
           </div>
           <h2
-            className={`m-0 mb-5 font-serif text-[26px] font-normal leading-[1.25] text-pretty md:text-[32px] ${
+            className={`m-0 mb-5 font-serif text-[30px] font-normal leading-[1.2] text-pretty md:text-[38px] ${
               dark ? "text-white" : "text-[#1B2430]"
             }`}
           >
@@ -45,7 +45,7 @@ export default function FeatureSection({
             <p
               key={text.slice(0, 24)}
               className={`m-0 mb-[18px] text-[16.5px] leading-[1.75] ${
-                dark ? "text-[#C8D6EB]" : "text-[#374151]"
+                dark ? "text-[#D5E0F0]" : "text-[#374151]"
               }`}
             >
               {text}
@@ -57,7 +57,7 @@ export default function FeatureSection({
               {points.map((point) => (
                 <li
                   key={point}
-                  className={`flex gap-3 border-t py-[14px] text-[15.5px] leading-[1.6] last:border-b ${
+                  className={`flex gap-3 border-t py-[14px] text-[16px] leading-[1.6] last:border-b ${
                     dark
                       ? "border-white/20 text-[#D5E0F0]"
                       : "border-[#E5E4E0] text-[#374151]"

@@ -53,15 +53,15 @@ export default function NumberedProcess({
                   </span>
                   <div>
                     <h3
-                      className={`m-0 mb-2 font-serif text-[19px] font-normal leading-[1.35] md:text-[21px] ${
+                      className={`m-0 mb-2 font-serif text-[20px] font-normal leading-[1.35] md:text-[22px] ${
                         dark ? "text-white" : "text-[#1B2430]"
                       }`}
                     >
                       {step.title}
                     </h3>
                     <p
-                      className={`m-0 text-[16px] leading-[1.7] ${
-                        dark ? "text-[#C8D6EB]" : "text-[#4B5563]"
+                      className={`m-0 text-[16.5px] leading-[1.7] ${
+                        dark ? "text-[#D5E0F0]" : "text-[#374151]"
                       }`}
                     >
                       {step.desc}
@@ -78,7 +78,7 @@ export default function NumberedProcess({
         <Reveal>
           <p
             className={`m-0 mt-10 max-w-[760px] text-[15.5px] leading-[1.7] ${
-              dark ? "text-[#9FB8DC]" : "text-[#6B7280]"
+              dark ? "text-[#C8D6EB]" : "text-[#4B5563]"
             }`}
           >
             {note}

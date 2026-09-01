@@ -15,10 +15,10 @@ export default function ContactCTA() {
           <div className="eyebrow mb-[18px] text-[#9FB8DC]">
             Not sure where to start?
           </div>
-          <h2 className="m-0 mb-5 font-serif text-[30px] font-normal leading-[1.2] text-pretty md:text-[40px]">
+          <h2 className="m-0 mb-5 font-serif text-[34px] font-normal leading-[1.15] text-pretty md:text-[46px]">
             Let&rsquo;s talk about what you need.
           </h2>
-          <p className="m-0 mb-9 text-[17px] leading-[1.7] text-[#D5E0F0] md:text-[18px]">
+          <p className="m-0 mb-9 text-[17.5px] leading-[1.7] text-[#D5E0F0] md:text-[19px]">
             Whether you have a straightforward question or a more complex
             financial situation, our team is here to help.
           </p>

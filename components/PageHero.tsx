@@ -47,13 +47,13 @@ export default function PageHero({
               {eyebrow}
             </div>
             <h1
-              className="br-rise m-0 mb-5 font-serif text-[32px] font-normal leading-[1.14] text-pretty text-[#1B2430] sm:text-[40px] md:text-[46px]"
+              className="br-rise m-0 mb-5 font-serif text-[36px] font-normal leading-[1.1] text-pretty text-[#1B2430] sm:text-[46px] md:text-[54px]"
               style={{ animationDelay: "110ms" }}
             >
               {heading}
             </h1>
             <p
-              className="br-rise m-0 max-w-[580px] text-[16.5px] leading-[1.7] text-[#374151] md:text-[17px]"
+              className="br-rise m-0 max-w-[580px] text-[17px] leading-[1.7] text-[#374151] md:text-[17px]"
               style={{ animationDelay: "160ms" }}
             >
               {intro}
@@ -82,7 +82,7 @@ export default function PageHero({
           <div className="br-rise" style={{ animationDelay: "200ms" }}>
             {media}
             {caption ? (
-              <div className="mt-3 text-[13.5px] text-[#6B7280]">{caption}</div>
+              <div className="mt-3 text-[14px] text-[#4B5563]">{caption}</div>
             ) : null}
           </div>
         </div>

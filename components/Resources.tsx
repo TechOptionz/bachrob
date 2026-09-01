@@ -9,10 +9,10 @@ export default function Resources() {
     >
       <div className="shell">
         <div className="eyebrow mb-[14px] text-[#9FB8DC]">Helpful resources</div>
-        <h2 className="m-0 mb-3 font-serif text-[26px] font-normal md:text-[32px]">
+        <h2 className="m-0 mb-3 font-serif text-[30px] font-normal md:text-[38px]">
           Tools &amp; guides from the ATO
         </h2>
-        <p className="m-0 mb-10 max-w-[620px] text-[16px] text-[#C8D6EB]">
+        <p className="m-0 mb-10 max-w-[620px] text-[17px] text-[#D5E0F0]">
           Quick links we share with clients most often. For anything specific to
           your situation, give us a call — that&rsquo;s what we&rsquo;re here
           for.
@@ -29,7 +29,7 @@ export default function Resources() {
               <div className="mb-[6px] text-[15.5px] font-bold">
                 {r.name} ↗
               </div>
-              <div className="text-[13.5px] leading-[1.45] text-[#C8D6EB]">
+              <div className="text-[14.5px] leading-[1.5] text-[#D5E0F0]">
                 {r.desc}
               </div>
             </a>

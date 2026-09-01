@@ -13,7 +13,7 @@ export default function TeamCard({ member }: { member: TeamMember }) {
           {initials(member.name)}
         </div>
         <div>
-          <div className="font-serif text-[18px]">{member.name}</div>
+          <div className="font-serif text-[19px]">{member.name}</div>
           <div className="text-[13.5px] font-semibold text-[#1E4B8F]">
             {member.role}
           </div>
@@ -21,19 +21,19 @@ export default function TeamCard({ member }: { member: TeamMember }) {
       </div>
 
       {member.creds && (
-        <div className="mb-[10px] text-[12.5px] uppercase tracking-[0.5px] text-[#6B7280]">
+        <div className="mb-[10px] text-[13px] uppercase tracking-[0.5px] text-[#4B5563]">
           {member.creds}
         </div>
       )}
 
-      <p className="m-0 text-[14.5px] leading-[1.6] text-[#4B5563]">
+      <p className="m-0 text-[15px] leading-[1.65] text-[#374151]">
         {member.bio}
       </p>
 
       {member.more && (
         <>
           {expanded && (
-            <p className="mb-0 mt-[10px] text-[14.5px] leading-[1.6] text-[#4B5563]">
+            <p className="mb-0 mt-[10px] text-[15px] leading-[1.65] text-[#374151]">
               {member.more}
             </p>
           )}

@@ -13,7 +13,7 @@ function Detail({
       <div className="w-1 shrink-0 bg-[#1E4B8F]" />
       <div>
         <div className="mb-[3px] text-[15px] font-bold">{title}</div>
-        <div className="text-[15px] leading-[1.5] text-[#4B5563]">
+        <div className="text-[15.5px] leading-[1.55] text-[#374151]">
           {children}
         </div>
       </div>
@@ -27,10 +27,10 @@ export default function Contact() {
       <div className="shell grid grid-cols-[repeat(auto-fit,minmax(min(340px,100%),1fr))] gap-14">
         <div>
           <div className="eyebrow mb-[14px] text-[#1E4B8F]">Get in touch</div>
-          <h2 className="m-0 mb-5 font-serif text-[28px] font-normal md:text-[36px]">
+          <h2 className="m-0 mb-5 font-serif text-[30px] font-normal md:text-[40px]">
             Book a consultation
           </h2>
-          <p className="m-0 mb-8 text-[16.5px] leading-[1.7] text-[#374151]">
+          <p className="m-0 mb-8 text-[17px] leading-[1.7] text-[#374151]">
             Give us a call, send a message, or drop into the office. We&rsquo;ll
             get back to you as soon as possible.
           </p>

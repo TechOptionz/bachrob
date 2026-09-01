@@ -31,10 +31,10 @@ export default function AudienceSection({
         {groups.map((group, i) => (
           <Reveal key={group.name} delay={Math.min(i, 5) * 55}>
             <div className="border-t border-[#D8DCE2] pt-5">
-              <h3 className="m-0 mb-2 font-serif text-[18px] font-normal text-[#1B2430]">
+              <h3 className="m-0 mb-2 font-serif text-[19px] font-normal text-[#1B2430]">
                 {group.name}
               </h3>
-              <p className="m-0 text-[15.5px] leading-[1.65] text-[#4B5563]">
+              <p className="m-0 text-[16px] leading-[1.65] text-[#374151]">
                 {group.desc}
               </p>
             </div>
@@ -44,7 +44,7 @@ export default function AudienceSection({
 
       {note ? (
         <Reveal>
-          <p className="m-0 mt-10 max-w-[720px] text-[15.5px] leading-[1.7] text-[#6B7280]">
+          <p className="m-0 mt-10 max-w-[720px] text-[15.5px] leading-[1.7] text-[#4B5563]">
             {note}
           </p>
         </Reveal>

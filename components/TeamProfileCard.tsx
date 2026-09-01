@@ -58,7 +58,7 @@ export default function TeamProfileCard({ member }: { member: TeamMember }) {
       </div>
 
       <div className="flex grow flex-col p-[26px]">
-        <div className="font-serif text-[19px] text-[#1B2430]">
+        <div className="font-serif text-[20px] text-[#1B2430]">
           {member.name}
         </div>
         <div className="mt-[2px] text-[13.5px] font-semibold text-[#1E4B8F]">
@@ -66,19 +66,19 @@ export default function TeamProfileCard({ member }: { member: TeamMember }) {
         </div>
 
         {member.creds && (
-          <div className="mt-[10px] text-[12.5px] uppercase tracking-[0.5px] text-[#6B7280]">
+          <div className="mt-[10px] text-[13px] uppercase tracking-[0.5px] text-[#4B5563]">
             {member.creds}
           </div>
         )}
 
-        <p className="m-0 mt-3 text-[14.5px] leading-[1.6] text-[#4B5563]">
+        <p className="m-0 mt-3 text-[15px] leading-[1.65] text-[#374151]">
           {member.bio}
         </p>
 
         {member.more && (
           <>
             {expanded && (
-              <p className="m-0 mt-[10px] text-[14.5px] leading-[1.6] text-[#4B5563]">
+              <p className="m-0 mt-[10px] text-[15px] leading-[1.65] text-[#374151]">
                 {member.more}
               </p>
             )}

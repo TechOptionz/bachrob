@@ -3,7 +3,6 @@ import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
 import About from "@/components/About";
-import Team from "@/components/Team";
 import Resources from "@/components/Resources";
 import Contact from "@/components/Contact";
 import ContactCTA from "@/components/ContactCTA";
@@ -23,7 +22,6 @@ export default function Home() {
         <main>
           <Services />
           <About />
-          <Team />
           <Resources />
           <Contact />
           <ContactCTA />

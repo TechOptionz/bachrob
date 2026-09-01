@@ -37,7 +37,7 @@ export default function ServiceFAQ({
             <Reveal key={faq.q} delay={Math.min(i, 4) * 45}>
               <details className="faq-item group border-b border-[#E5E4E0]">
                 <summary className="flex items-start gap-5 py-6">
-                  <h3 className="m-0 flex-1 font-serif text-[18px] font-normal leading-[1.45] text-[#1B2430] transition-colors group-hover:text-[#1E4B8F] md:text-[19px]">
+                  <h3 className="m-0 flex-1 font-serif text-[19px] font-normal leading-[1.45] text-[#1B2430] transition-colors group-hover:text-[#1E4B8F] md:text-[19px]">
                     {faq.q}
                   </h3>
                   <span
@@ -45,7 +45,7 @@ export default function ServiceFAQ({
                     className="faq-icon relative mt-[5px] block h-[13px] w-[13px] shrink-0"
                   />
                 </summary>
-                <div className="faq-panel pb-7 pr-8 text-[16px] leading-[1.75] text-[#4B5563]">
+                <div className="faq-panel pb-7 pr-8 text-[16px] leading-[1.75] text-[#374151]">
                   {faq.a}
                 </div>
               </details>

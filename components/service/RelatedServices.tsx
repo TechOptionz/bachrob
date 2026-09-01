@@ -34,7 +34,7 @@ export default function RelatedServices({
               <span className="mb-[10px] font-serif text-[19px] leading-[1.35] text-[#1B2430] transition-colors group-hover:text-[#1E4B8F]">
                 {card.name}
               </span>
-              <span className="mb-6 text-[15px] leading-[1.55] text-[#4B5563]">
+              <span className="mb-6 text-[15.5px] leading-[1.6] text-[#374151]">
                 {card.desc}
               </span>
               <span className="mt-auto text-[14px] font-semibold text-[#1E4B8F]">

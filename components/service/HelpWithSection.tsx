@@ -43,11 +43,11 @@ export default function HelpWithSection({
                   <span className="font-serif text-[13px] tracking-[1px] text-[#7593C1]">
                     {pad(i)}
                   </span>
-                  <h3 className="m-0 font-serif text-[19px] font-normal leading-[1.35] text-[#1B2430] md:text-[21px]">
+                  <h3 className="m-0 font-serif text-[20px] font-normal leading-[1.35] text-[#1B2430] md:text-[22px]">
                     {item.title}
                   </h3>
                 </div>
-                <p className="m-0 text-[16px] leading-[1.7] text-[#4B5563]">
+                <p className="m-0 text-[16.5px] leading-[1.7] text-[#374151]">
                   {item.desc}
                 </p>
               </div>
@@ -65,10 +65,10 @@ export default function HelpWithSection({
                   aria-hidden="true"
                   className="mb-4 block h-[3px] w-[26px] bg-[#1E4B8F]"
                 />
-                <h3 className="m-0 mb-[10px] font-serif text-[19px] font-normal leading-[1.35] text-[#1B2430]">
+                <h3 className="m-0 mb-[10px] font-serif text-[20px] font-normal leading-[1.35] text-[#1B2430]">
                   {item.title}
                 </h3>
-                <p className="m-0 text-[15.5px] leading-[1.65] text-[#4B5563]">
+                <p className="m-0 text-[16px] leading-[1.65] text-[#374151]">
                   {item.desc}
                 </p>
               </div>
@@ -86,10 +86,10 @@ export default function HelpWithSection({
                   <div className="mb-4 font-serif text-[26px] leading-none text-[#C8D6EB]">
                     {pad(i)}
                   </div>
-                  <h3 className="m-0 mb-[10px] font-serif text-[19px] font-normal leading-[1.35] text-[#1B2430]">
+                  <h3 className="m-0 mb-[10px] font-serif text-[20px] font-normal leading-[1.35] text-[#1B2430]">
                     {item.title}
                   </h3>
-                  <p className="m-0 text-[15.5px] leading-[1.65] text-[#4B5563]">
+                  <p className="m-0 text-[16px] leading-[1.65] text-[#374151]">
                     {item.desc}
                   </p>
                 </div>
@@ -101,7 +101,7 @@ export default function HelpWithSection({
 
       {footnote ? (
         <Reveal>
-          <p className="m-0 mt-8 max-w-[680px] text-[15px] leading-[1.65] text-[#6B7280]">
+          <p className="m-0 mt-8 max-w-[680px] text-[15px] leading-[1.65] text-[#4B5563]">
             {footnote}
           </p>
         </Reveal>

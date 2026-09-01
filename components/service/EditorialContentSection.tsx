@@ -48,7 +48,7 @@ export default function EditorialContentSection({
                 <div className="mb-2 text-[15px] font-bold text-[#1B2430]">
                   {aside.title}
                 </div>
-                <p className="m-0 text-[15.5px] leading-[1.65] text-[#4B5563]">
+                <p className="m-0 text-[16px] leading-[1.65] text-[#374151]">
                   {aside.body}
                 </p>
               </div>

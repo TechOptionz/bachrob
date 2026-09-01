@@ -107,10 +107,10 @@ export default function TeamPage() {
                     aria-hidden="true"
                     className="mb-4 block h-[3px] w-[26px] bg-[#1E4B8F]"
                   />
-                  <h3 className="m-0 mb-[10px] font-serif text-[19px] font-normal leading-[1.35] text-[#1B2430]">
+                  <h3 className="m-0 mb-[10px] font-serif text-[20px] font-normal leading-[1.35] text-[#1B2430]">
                     {item.title}
                   </h3>
-                  <p className="m-0 text-[15.5px] leading-[1.65] text-[#4B5563]">
+                  <p className="m-0 text-[16px] leading-[1.65] text-[#374151]">
                     {item.desc}
                   </p>
                 </div>
@@ -121,7 +121,7 @@ export default function TeamPage() {
           {/* D. Work-with-us CTA */}
           <Reveal>
             <div className="mt-12 flex flex-wrap items-center gap-5">
-              <span className="text-[16px] text-[#4B5563]">
+              <span className="text-[16px] text-[#374151]">
                 Ready to put this team to work?
               </span>
               <Link href="/#contact" className="rule-link">

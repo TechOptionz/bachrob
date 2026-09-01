@@ -21,10 +21,10 @@ export default function Hero() {
           <div className="eyebrow mb-5 text-[#9FB8DC]">
             Ipswich, Queensland · Since 1990
           </div>
-          <h1 className="m-0 mb-6 font-serif text-[36px] font-normal leading-[1.15] text-pretty sm:text-[44px] md:text-[52px]">
+          <h1 className="m-0 mb-6 font-serif text-[40px] font-normal leading-[1.1] text-pretty sm:text-[50px] md:text-[58px]">
             An accounting firm where people come first.
           </h1>
-          <p className="m-0 mb-9 max-w-[600px] text-[17px] leading-[1.6] text-[#D5E0F0] md:text-[19px]">
+          <p className="m-0 mb-9 max-w-[600px] text-[18px] leading-[1.65] text-[#D5E0F0] md:text-[20px]">
             Local Ipswich accountants, auditors and registered tax agents
             helping individuals, businesses and self-managed super funds for
             more than three decades.
@@ -49,7 +49,7 @@ export default function Hero() {
           {stats.map((s) => (
             <div key={s.label}>
               <div className="font-serif text-[28px]">{s.value}</div>
-              <div className="text-[14px] text-[#9FB8DC]">{s.label}</div>
+              <div className="text-[14.5px] text-[#C8D6EB]">{s.label}</div>
             </div>
           ))}
         </div>

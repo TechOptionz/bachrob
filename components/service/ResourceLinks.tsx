@@ -58,7 +58,7 @@ export default function ResourceLinks({
               </span>
               <span
                 className={`text-[13.5px] leading-[1.45] ${
-                  dark ? "text-[#C8D6EB]" : "text-[#4B5563]"
+                  dark ? "text-[#D5E0F0]" : "text-[#374151]"
                 }`}
               >
                 {link.desc}
@@ -71,7 +71,7 @@ export default function ResourceLinks({
       <Reveal>
         <p
           className={`m-0 mt-8 max-w-[740px] text-[14px] leading-[1.7] ${
-            dark ? "text-[#9FB8DC]" : "text-[#6B7280]"
+            dark ? "text-[#C8D6EB]" : "text-[#4B5563]"
           }`}
         >
           These are external government resources, published and maintained by
