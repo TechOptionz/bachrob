@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { resources } from "@/lib/data";
 
 export default function Resources() {
@@ -33,6 +34,14 @@ export default function Resources() {
               </div>
             </a>
           ))}
+        </div>
+        <div className="mt-10">
+          <Link
+            href="/resources"
+            className="border-b-2 border-white pb-[2px] text-[16px] font-bold text-white hover:text-white"
+          >
+            Browse all insights &amp; resources →
+          </Link>
         </div>
       </div>
     </section>

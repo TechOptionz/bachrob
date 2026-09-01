@@ -1,17 +1,24 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
+/* Every top-level item now lives on its own route. */
 const links = [
-  { href: "#services", label: "Services" },
-  { href: "#about", label: "About" },
-  { href: "#team", label: "Team" },
-  { href: "#resources", label: "Resources" },
+  { href: "/services", label: "Services" },
+  { href: "/about", label: "About" },
+  { href: "/team", label: "Team" },
+  { href: "/resources", label: "Resources" },
 ];
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  /* Exact match, plus child routes — Services stays lit on /services/[slug]. */
+  const isActive = (href: string) =>
+    pathname === href || pathname.startsWith(`${href}/`);
 
   return (
     <nav className="sticky top-0 z-50 bg-white">
@@ -31,16 +38,20 @@ export default function Nav() {
         </svg>
       </div>
       <div className="flex items-center justify-between gap-6 px-5 py-[14px] md:px-10">
-        <a href="#top" className="flex items-center gap-3">
-          <Image
-            src="/assets/br-monogram.png"
-            alt="Bachmann Robinson monogram"
-            width={46}
-            height={46}
-            priority
-            className="block h-[46px] w-auto"
-          />
-          <div className="h-10 w-px bg-[#D8DCE2]" />
+        <Link href="/" className="flex items-center gap-3">
+          {/* Brand mark: white monogram on the #174582 tile, as on the
+              original site. Composed rather than using br-mark.png, which is
+              only 77px wide and would blur at this size. */}
+          <span className="flex h-[46px] w-[46px] shrink-0 items-center justify-center bg-[#174582]">
+            <Image
+              src="/assets/br-monogram-light.png"
+              alt="Bachmann Robinson monogram"
+              width={432}
+              height={400}
+              priority
+              className="block h-[30px] w-auto"
+            />
+          </span>
           <div>
             <div className="font-serif text-[15px] tracking-[0.5px] text-[#1B2430] sm:text-[19px]">
               BACHMANN ROBINSON
@@ -49,25 +60,30 @@ export default function Nav() {
               Accountants, Auditors &amp; Tax Agent
             </div>
           </div>
-        </a>
+        </Link>
 
         {/* Desktop links */}
         <div className="hidden items-center gap-[26px] lg:flex">
           {links.map((l) => (
-            <a
+            <Link
               key={l.href}
               href={l.href}
-              className="text-[15px] font-medium text-[#374151] hover:text-[#1E4B8F]"
+              aria-current={isActive(l.href) ? "page" : undefined}
+              className={`text-[15px] hover:text-[#1E4B8F] ${
+                isActive(l.href)
+                  ? "font-semibold text-[#1E4B8F]"
+                  : "font-medium text-[#374151]"
+              }`}
             >
               {l.label}
-            </a>
+            </Link>
           ))}
-          <a
-            href="#contact"
+          <Link
+            href="/#contact"
             className="bg-[#1E4B8F] px-5 py-[10px] text-[15px] font-semibold text-white hover:bg-[#16396E] hover:text-white"
           >
             Book a consultation
-          </a>
+          </Link>
         </div>
 
         {/* Mobile toggle */}
@@ -105,22 +121,27 @@ export default function Nav() {
         >
           <div className="flex flex-col">
             {links.map((l) => (
-              <a
+              <Link
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="border-b border-[#F1F3F0] py-3 text-[16px] font-medium text-[#374151] hover:text-[#1E4B8F]"
+                aria-current={isActive(l.href) ? "page" : undefined}
+                className={`border-b border-[#F1F3F0] py-3 text-[16px] hover:text-[#1E4B8F] ${
+                  isActive(l.href)
+                    ? "font-semibold text-[#1E4B8F]"
+                    : "font-medium text-[#374151]"
+                }`}
               >
                 {l.label}
-              </a>
+              </Link>
             ))}
-            <a
-              href="#contact"
+            <Link
+              href="/#contact"
               onClick={() => setOpen(false)}
               className="mt-4 bg-[#1E4B8F] px-5 py-3 text-center text-[15px] font-semibold text-white hover:bg-[#16396E] hover:text-white"
             >
               Book a consultation
-            </a>
+            </Link>
           </div>
         </div>
       )}

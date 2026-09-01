@@ -3,18 +3,20 @@ import { site } from "@/lib/data";
 
 export default function Footer() {
   return (
-    <footer className="gutter bg-[#12192A] pb-10 pt-14 text-[#8A94A6]">
+    <footer className="gutter relative -mt-12 rounded-t-[50%_48px] bg-[#12192A] pb-10 pt-20 text-[#8A94A6] md:pt-28 shadow-[0_-26px_44px_-10px_rgba(18,25,42,0.25)] md:-mt-[72px] md:rounded-t-[50%_72px]">
       <div className="shell">
         <div className="flex flex-wrap justify-between gap-10 border-b border-white/10 pb-9">
           <div className="max-w-[340px]">
             <div className="mb-[14px] flex items-center gap-3">
-              <Image
-                src="/assets/br-monogram-light.png"
-                alt="Bachmann Robinson monogram"
-                width={40}
-                height={40}
-                className="block h-10 w-auto opacity-90"
-              />
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center bg-[#174582]">
+                <Image
+                  src="/assets/br-monogram-light.png"
+                  alt="Bachmann Robinson monogram"
+                  width={432}
+                  height={400}
+                  className="block h-[26px] w-auto"
+                />
+              </span>
               <div>
                 <div className="font-serif text-[16px] tracking-[0.5px] text-white">
                   BACHMANN ROBINSON

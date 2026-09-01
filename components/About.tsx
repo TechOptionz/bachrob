@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function About() {
   return (
@@ -26,9 +27,14 @@ export default function About() {
             Our experienced and friendly staff are focused on getting the best
             possible outcome for our clients by leaving no stone unturned.
           </p>
-          <a href="#team" className="rule-link">
-            Meet the team →
-          </a>
+          <div className="flex flex-wrap gap-x-8 gap-y-3">
+            <Link href="/about" className="rule-link">
+              More about the firm →
+            </Link>
+            <Link href="/team" className="rule-link">
+              Meet the team →
+            </Link>
+          </div>
         </div>
 
         <div>

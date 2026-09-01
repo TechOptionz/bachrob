@@ -101,3 +101,143 @@
     padding-inline: 20px;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Service detail pages — motion + accordion primitives.
+   Kept here (rather than in a component) so the collapsed/hidden states are
+   defined by CSS the browser applies before hydration, and so the reduced
+   motion + noscript escape hatches can override everything in one place.
+--------------------------------------------------------------------------- */
+
+/* Scroll reveal. The element ships opacity:0 and is un-hidden by the Reveal
+   client component the moment it intersects. A <noscript> style block on the
+   page neutralises it entirely for visitors without JavaScript. */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 480ms ease,
+    transform 480ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+[data-reveal][data-shown="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Hero copy animates on load rather than on scroll — it is always in view, so
+   an observer would only delay it. */
+@keyframes br-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.br-rise {
+  animation: br-rise 560ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+/* Thin rule that draws itself in under section headings. */
+@keyframes br-rule {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.br-rule {
+  transform-origin: left center;
+  animation: br-rule 520ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+/* --- FAQ accordion -------------------------------------------------------
+   Built on <details>/<summary>: keyboard and screen-reader behaviour comes
+   from the browser, the answers stay in the HTML for crawlers, and it still
+   works with JavaScript disabled. */
+.faq-item > summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+.faq-item > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Plus that becomes a minus. */
+.faq-icon::before,
+.faq-icon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  background: #1e4b8f;
+  transition: transform 260ms ease;
+}
+
+.faq-icon::before {
+  height: 1.5px;
+  width: 13px;
+}
+
+.faq-icon::after {
+  width: 1.5px;
+  height: 13px;
+}
+
+.faq-item[open] .faq-icon::after {
+  transform: scaleY(0);
+}
+
+@keyframes br-faq-open {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.faq-item[open] .faq-panel {
+  animation: br-faq-open 280ms ease both;
+}
+
+/* Visible keyboard focus everywhere on the service pages. */
+:where(a, button, summary, input, textarea, select):focus-visible {
+  outline: 2px solid #1e4b8f;
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  [data-reveal],
+  [data-reveal][data-shown="true"] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .br-rise,
+  .br-rule,
+  .faq-item[open] .faq-panel {
+    animation: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -54,7 +54,14 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en-AU" className={`${libreCaslon.variable} ${sourceSans.variable}`}>
-      <body>{children}</body>
+      <body>
+        {/* Scroll-reveal wrappers ship at opacity 0 and are un-hidden by JS.
+            Without JavaScript they must stay visible. */}
+        <noscript>
+          <style>{`[data-reveal]{opacity:1 !important;transform:none !important}`}</style>
+        </noscript>
+        {children}
+      </body>
     </html>
   );
 }

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { services } from "@/lib/data";
 
 export default function Services() {
@@ -17,28 +18,46 @@ export default function Services() {
         {/* 1px gap over a stone background gives the hairline grid from the design */}
         <div className="grid grid-cols-[repeat(auto-fill,minmax(min(300px,100%),1fr))] gap-px border border-[#E5E4E0] bg-[#E5E4E0]">
           {services.map((s) => (
-            <div
-              key={s.name}
-              className="bg-white px-7 pb-8 pt-7 transition-colors hover:bg-[#F5F8FC]"
+            <Link
+              key={s.slug}
+              href={`/services/${s.slug}`}
+              className="group flex flex-col bg-white px-7 pb-7 pt-7 text-[#1B2430] transition-colors hover:bg-[#F5F8FC] hover:text-[#1B2430]"
             >
-              <div className="mb-[18px] h-[3px] w-[34px] bg-[#1E4B8F]" />
-              <h3 className="m-0 mb-[10px] font-serif text-[19px] font-normal">
+              {/* The accent rule extends on hover — the same restrained cue
+                  used on the related-service cards. */}
+              <span
+                aria-hidden="true"
+                className="mb-[18px] block h-[3px] w-[34px] bg-[#1E4B8F] transition-[width] duration-300 group-hover:w-[52px]"
+              />
+              <h3 className="m-0 mb-[10px] font-serif text-[19px] font-normal transition-colors group-hover:text-[#1E4B8F]">
                 {s.name}
               </h3>
-              <p className="m-0 text-[15px] leading-[1.55] text-[#4B5563]">
+              <p className="m-0 mb-6 text-[15px] leading-[1.55] text-[#4B5563]">
                 {s.desc}
               </p>
-            </div>
+              <span className="mt-auto text-[14px] font-semibold text-[#1E4B8F]">
+                Read more{" "}
+                <span
+                  aria-hidden="true"
+                  className="inline-block transition-transform duration-300 group-hover:translate-x-1"
+                >
+                  &rarr;
+                </span>
+              </span>
+            </Link>
           ))}
         </div>
 
-        <div className="mt-9 flex flex-wrap items-center gap-5">
+        <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-3">
+          <Link href="/services" className="rule-link">
+            Explore all services in detail →
+          </Link>
           <span className="text-[16px] text-[#4B5563]">
-            Not sure what you need?
+            Not sure what you need?{" "}
+            <a href="#contact" className="rule-link">
+              Talk to an accountant →
+            </a>
           </span>
-          <a href="#contact" className="rule-link">
-            Talk to an accountant →
-          </a>
         </div>
       </div>
     </section>

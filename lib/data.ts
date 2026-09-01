@@ -1,4 +1,6 @@
-export type Service = { name: string; desc: string };
+import type { ServiceSlug } from "./services";
+
+export type Service = { name: string; desc: string; slug: ServiceSlug };
 export type TeamMember = {
   name: string;
   role: string;
@@ -11,38 +13,47 @@ export type Resource = { name: string; desc: string; url: string };
 export const services: Service[] = [
   {
     name: "Income Tax Returns",
+    slug: "income-tax-returns",
     desc: "Individuals, companies, trusts and partnerships — from simple returns to rental properties and defence personnel.",
   },
   {
     name: "Business Advice & Development",
+    slug: "business-advice-development",
     desc: "Practical advice on structure, growth and strategy for small and medium businesses.",
   },
   {
     name: "SMSF Administration",
+    slug: "smsf-administration",
     desc: "A dedicated department for Self-Managed Super Funds, backed by our ASIC licence for super advice.",
   },
   {
     name: "Financial Statements",
+    slug: "financial-statements",
     desc: "Accurate, timely statements that give you a clear picture of where your business stands.",
   },
   {
     name: "Business Activity Statements",
+    slug: "business-activity-statements",
     desc: "BAS preparation and lodgement handled meticulously, on time, every time.",
   },
   {
     name: "Taxation Planning & Advice",
+    slug: "taxation-planning-advice",
     desc: "Forward planning to identify tax-saving opportunities and effective strategies.",
   },
   {
     name: "Non-profit Association Audits",
+    slug: "non-profit-association-audits",
     desc: "Independent audits of non-profit associations and trust accounts.",
   },
   {
     name: "Bookkeeping Services",
+    slug: "bookkeeping",
     desc: "Day-to-day bookkeeping across QuickBooks, Reckon, MYOB and other packages.",
   },
   {
     name: "Financial Advice",
+    slug: "financial-advice",
     desc: "Guidance on super and financial decisions from FASEA-qualified professionals.",
   },
 ];

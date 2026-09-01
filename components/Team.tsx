@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { team } from "@/lib/data";
 import TeamCard from "./TeamCard";
 
@@ -17,6 +18,11 @@ export default function Team() {
           {team.map((m) => (
             <TeamCard key={m.name} member={m} />
           ))}
+        </div>
+        <div className="mt-10">
+          <Link href="/team" className="rule-link">
+            View full team profiles →
+          </Link>
         </div>
       </div>
     </section>
