@@ -1,16 +1,19 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { keyob } from "@/lib/keyob";
 import KeyobLogo from "./KeyobLogo";
 
-const STORAGE_KEY = "br-keyob-strip-dismissed";
+/* Keyed by the discount so a changed offer re-surfaces the strip for
+   visitors who dismissed the old one. */
+const STORAGE_KEY = `br-keyob-strip:${keyob.discount}`;
 
 /**
- * Slim, dismissible announcement strip for the KEYOB partnership. Sits at the
- * very top of the page, above the contact TopBar. Dismissal is remembered in
- * localStorage so the strip doesn't nag a visitor on every page load.
+ * Slim, dismissible announcement strip for the KEYOB partnership — the
+ * host-brand-led "Variant A". Sits at the very top of the home page, above
+ * the contact TopBar, and points to the full partner section on /about.
  *
  * The strip renders on the server (so it's present without JavaScript) and is
  * removed on mount if a previous visit dismissed it.
@@ -38,36 +41,34 @@ export default function KeyobStrip() {
   };
 
   return (
-    <div className="relative flex flex-wrap items-center justify-center gap-x-5 gap-y-2 border-b-[3px] border-[#01BCFE] bg-[#F5F8FC] py-[11px] pl-5 pr-12 md:px-14">
-      <p className="m-0 text-[14.5px] leading-[1.5] text-[#1B2430]">
+    <div className="relative flex flex-wrap items-center gap-x-4 gap-y-[10px] border-b-[3px] border-t border-b-[#1E4B8F] border-t-[#E5E4E0] bg-[#F5F8FC] py-[11px] pl-5 pr-14 max-md:justify-start md:justify-center md:px-16">
+      <p className="m-0 text-[15px] leading-[1.45] text-[#1B2430] md:text-[15.5px]">
         Bachmann Robinson clients save{" "}
-        <strong className="text-[16.5px] font-extrabold text-[#1E4B8F]">
+        <strong className="text-[19px] font-extrabold tracking-[-0.01em] text-[#1E4B8F] md:text-[20px]">
           {keyob.discount}
         </strong>{" "}
-        on IT, websites &amp; automation.
+        on websites, automation &amp; social media.
       </p>
 
-      <span className="flex items-center gap-[10px] border-l border-[#D8DCE2] pl-5 max-sm:hidden">
-        <span className="text-[10.5px] font-bold uppercase tracking-[1.2px] text-[#4B5563]">
+      <span className="flex items-center gap-2 border-l border-[#E5E4E0] pl-4 max-sm:hidden">
+        <span className="whitespace-nowrap text-[10.5px] font-bold uppercase tracking-[1.2px] text-[#4B5563]">
           Our IT partner
         </span>
         <KeyobLogo className="h-[13px]" />
       </span>
 
-      <a
-        href={keyob.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-[#14295A] px-4 py-[7px] text-[13px] font-bold text-white transition-colors hover:bg-[#1B356E] hover:text-white"
+      <Link
+        href={keyob.sectionUrl}
+        className="inline-flex min-h-[38px] items-center bg-[#1E4B8F] px-[18px] text-[13.5px] font-bold text-white transition-opacity hover:text-white hover:opacity-90"
       >
         Learn more
-      </a>
+      </Link>
 
       <button
         type="button"
         onClick={dismiss}
         aria-label="Dismiss announcement"
-        className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer border-0 bg-transparent p-2 text-[19px] leading-none text-[#9CA3AF] transition-colors hover:text-[#1B2430] md:right-4"
+        className="absolute right-1 top-1/2 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center border-0 bg-transparent text-[20px] leading-none text-[#9AA7B5] transition-colors hover:text-[#1B2430] md:right-3"
       >
         &times;
       </button>

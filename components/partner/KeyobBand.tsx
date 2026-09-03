@@ -1,21 +1,16 @@
+import Link from "next/link";
+
 import Reveal from "@/components/service/Reveal";
-import { keyob, keyobDisclaimer } from "@/lib/keyob";
+import { keyob, keyobCapabilities, keyobDisclaimer } from "@/lib/keyob";
 import KeyobLogo from "./KeyobLogo";
 
-const capabilities = [
-  "Websites",
-  "AI & Automation",
-  "CRM Setup",
-  "System Integrations",
-  "Dashboards",
-  "Ongoing Support",
-];
+/* The headline services — the full list lives on the /about section. */
+const capabilities = keyobCapabilities.slice(0, 6);
 
 /**
  * Full-bleed KEYOB partnership band for the home page. KEYOB's navy (a shade
  * deeper than the site's own) with the cyan accent, so the band reads as a
- * co-branded announcement between the stone resources band and the cream
- * contact section.
+ * co-branded announcement between the stone resources band and the reviews.
  */
 export default function KeyobBand() {
   return (
@@ -29,17 +24,19 @@ export default function KeyobBand() {
                 aria-hidden="true"
                 className="h-[7px] w-[7px] rounded-full bg-[#01BCFE]"
               />
-              Bachmann Robinson &times; KEYOB
+              Bachmann Robinson{" "}
+              <span className="font-normal text-white/50">&times;</span> KEYOB
             </span>
             <h2 className="m-0 mt-6 max-w-[18ch] font-serif text-[30px] font-normal leading-[1.2] text-pretty md:text-[38px]">
-              Good numbers depend on good systems
+              We advise on your systems. KEYOB builds them
               <span className="text-[#01BCFE]">.</span>
             </h2>
             <p className="m-0 mt-5 max-w-[62ch] text-[16.5px] leading-[1.7] text-[#DCE6F5] md:text-[17.5px]">
-              We&rsquo;ve partnered with KEYOB — an Australian software and AI
-              team — to build the websites, automation and AI our clients run
-              on. Bachmann Robinson clients receive a preferred rate, and the
-              first conversation is free.
+              Good numbers depend on good systems. We&rsquo;ve partnered with
+              KEYOB &mdash; an Australian software, AI and digital marketing
+              team &mdash; to build the websites, social media, automation and
+              AI our clients run on. Bachmann Robinson clients receive a
+              preferred rate, and the first conversation is free.
             </p>
             <ul className="m-0 mt-7 flex list-none flex-wrap gap-[9px] p-0">
               {capabilities.map((c) => (
@@ -51,12 +48,18 @@ export default function KeyobBand() {
                 </li>
               ))}
             </ul>
+            <Link
+              href={keyob.sectionUrl}
+              className="mt-7 inline-block border-b-2 border-[#01BCFE] pb-[2px] text-[16px] font-bold text-white hover:text-white"
+            >
+              See what&rsquo;s included <span aria-hidden="true">&rarr;</span>
+            </Link>
           </Reveal>
 
           {/* Offer panel */}
           <Reveal delay={90} variant="right">
             <div className="border-t-4 border-[#01BCFE] bg-[#1B356E] px-8 py-8 text-center">
-              <span className="block font-serif text-[56px] leading-none tracking-[-0.01em] text-[#01BCFE]">
+              <span className="block text-[56px] font-extrabold leading-none tracking-[-0.02em] text-[#01BCFE]">
                 {keyob.discount}
               </span>
               <span className="mt-2 block text-[12px] font-bold uppercase tracking-[2.4px] text-white">
@@ -67,10 +70,8 @@ export default function KeyobBand() {
                 an introduction.
               </p>
               <a
-                href={keyob.contactUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-6 block bg-[#01BCFE] px-5 py-[13px] text-[15px] font-bold text-[#14295A] transition-opacity hover:text-[#14295A] hover:opacity-85"
+                href={keyob.mailto}
+                className="mt-6 flex min-h-[46px] items-center justify-center bg-[#01BCFE] px-5 text-[15px] font-bold text-[#14295A] transition-opacity hover:text-[#14295A] hover:opacity-85"
               >
                 Talk to KEYOB
               </a>
@@ -78,7 +79,7 @@ export default function KeyobBand() {
                 href={keyob.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-3 block border border-white/35 px-5 py-[12px] text-[14.5px] font-semibold text-white transition-colors hover:border-white hover:text-white"
+                className="mt-3 flex min-h-[44px] items-center justify-center border border-white/35 px-5 text-[14.5px] font-semibold text-white transition-colors hover:border-white hover:text-white"
               >
                 Visit keyob.com
               </a>
