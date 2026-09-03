@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { keyob } from "@/lib/keyob";
@@ -57,12 +56,14 @@ export default function KeyobStrip() {
         <KeyobLogo className="h-[13px]" />
       </span>
 
-      <Link
-        href={keyob.sectionUrl}
+      <a
+        href={keyob.contactUrl}
+        target="_blank"
+        rel="noopener noreferrer"
         className="inline-flex min-h-[38px] items-center bg-[#1E4B8F] px-[18px] text-[13.5px] font-bold text-white transition-opacity hover:text-white hover:opacity-90"
       >
         Learn more
-      </Link>
+      </a>
 
       <button
         type="button"

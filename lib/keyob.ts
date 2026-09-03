@@ -9,9 +9,9 @@
 export const keyob = {
   name: "KEYOB",
   url: "https://keyob.com",
-  /** Pre-addressed enquiry so KEYOB can see the referral came from us. */
-  mailto:
-    "mailto:info@keyob.com?subject=Bachmann%20Robinson%20client%20enquiry",
+  /** KEYOB's own contact page — every "Talk to KEYOB" / "Learn more" CTA
+      lands here so the enquiry goes straight into their booking form. */
+  contactUrl: "https://keyob.com/contact",
   /** The full partnership story on /about — every smaller promo points here. */
   sectionUrl: "/about#it-partner",
   discount: "10%",

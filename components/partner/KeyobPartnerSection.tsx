@@ -166,7 +166,9 @@ export default function KeyobPartnerSection() {
             </div>
             <div className="flex flex-wrap gap-3">
               <a
-                href={keyob.mailto}
+                href={keyob.contactUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex min-h-[48px] items-center whitespace-nowrap bg-[#01BCFE] px-[26px] text-[15px] font-bold text-[#14295A] transition-opacity hover:text-[#14295A] hover:opacity-85"
               >
                 Talk to KEYOB

@@ -81,8 +81,14 @@ export default function TeamProfileModal({
           className="pointer-events-auto w-full max-w-[880px]"
         >
           <div className="br-dialog-card grid overflow-hidden border border-[#E5E4E0] bg-white md:grid-cols-[minmax(0,320px)_1fr]">
-            {/* Portrait — full-height column on desktop, banner on phones. */}
-            <div className="relative h-64 overflow-hidden bg-[#F1F3F6] sm:h-80 md:h-auto md:min-h-[480px]">
+            {/* Portrait — full-height column on desktop, banner on phones.
+                The headshots are tight 4:5 crops with no headroom, so a
+                cover crop into the wide phone banner loses the chin. Below
+                md the whole portrait is contained instead, sitting on the
+                panel's bottom edge with a little air above the head; the
+                multiply blend drops the white backdrop into the panel grey so
+                it reads as a cutout rather than a letterboxed photo. */}
+            <div className="relative h-72 overflow-hidden bg-[#F1F3F6] sm:h-80 md:h-auto md:min-h-[480px]">
               <Image
                 src={teamPhoto(member.name)}
                 alt={member.name}
@@ -90,7 +96,7 @@ export default function TeamProfileModal({
                 height={1000}
                 sizes="(max-width: 767px) 100vw, 320px"
                 loading="eager"
-                className="absolute inset-0 h-full w-full object-cover object-top mix-blend-multiply"
+                className="absolute inset-0 h-full w-full object-contain object-bottom pt-5 mix-blend-multiply md:object-cover md:object-top md:pt-0"
                 unoptimized
               />
             </div>

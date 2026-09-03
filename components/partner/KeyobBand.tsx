@@ -70,7 +70,9 @@ export default function KeyobBand() {
                 an introduction.
               </p>
               <a
-                href={keyob.mailto}
+                href={keyob.contactUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="mt-6 flex min-h-[46px] items-center justify-center bg-[#01BCFE] px-5 text-[15px] font-bold text-[#14295A] transition-opacity hover:text-[#14295A] hover:opacity-85"
               >
                 Talk to KEYOB
