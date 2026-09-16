@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { isAleesaFormEnabled, sendLeadToAleesa } from "@/lib/aleesa/leads";
 
 type Payload = {
   name?: string;
@@ -65,9 +66,24 @@ export async function POST(request: Request) {
     return bad("Please confirm your consent so we can respond to you.");
   }
 
-  // Delivery is not wired up yet. Plug in the firm's mail provider here
-  // (Resend, SendGrid, SMTP, …) and send to admin@bachrob.com.au.
-  console.log("[contact]", { name, email, phone, topic, message });
+  // Enquiries are filed as Leads in Aleesa. Without the key (local dev) they
+  // are only logged — logs are not durable, so set it before launch.
+  if (!isAleesaFormEnabled()) {
+    console.log("[contact] Aleesa not configured", { name, email, phone, topic, message });
+    return NextResponse.json({ ok: true });
+  }
+
+  try {
+    await sendLeadToAleesa({ name, email, phone, topic, message });
+  } catch (error) {
+    // Aleesa is the only destination, so a failure must reach the visitor —
+    // the form then tells them to call or email instead.
+    console.error("[contact] Aleesa delivery failed", error);
+    return NextResponse.json(
+      { error: "Could not send your message." },
+      { status: 502 },
+    );
+  }
 
   return NextResponse.json({ ok: true });
 }

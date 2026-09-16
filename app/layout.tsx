@@ -3,6 +3,7 @@ import { Libre_Caslon_Text, Source_Sans_3 } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import ChatBot from "@/components/ChatBot";
 import { chatConfig } from "@/lib/chatbot";
+import { isAleesaChatEnabled } from "@/lib/aleesa/webchat";
 import "./globals.css";
 
 const libreCaslon = Libre_Caslon_Text({
@@ -64,9 +65,10 @@ export default function RootLayout({
           <style>{`[data-reveal]{opacity:1 !important;transform:none !important}`}</style>
         </noscript>
         {children}
-        {/* Site-wide chat assistant. The knowledge base is built server-side
-            from the same data the pages render, so answers never drift. */}
-        <ChatBot config={chatConfig} />
+        {/* Site-wide chat assistant. Answered by Aleesa Web Chat when it is
+            configured; the rule-based knowledge base (built server-side from
+            the same data the pages render) is the fallback. */}
+        <ChatBot config={chatConfig} live={isAleesaChatEnabled()} />
         <Analytics />
       </body>
     </html>

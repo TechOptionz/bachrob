@@ -15,16 +15,42 @@ type Msg = {
   chips?: string[];
 };
 
+const SESSION_KEY = "br-chat-session";
+
+/** One Aleesa session per browser tab, so the inbox keeps a single thread. */
+function getSessionId(): string {
+  const mint = () => `chat_${crypto.randomUUID()}`;
+  try {
+    let id = sessionStorage.getItem(SESSION_KEY);
+    if (!id) {
+      id = mint();
+      sessionStorage.setItem(SESSION_KEY, id);
+    }
+    return id;
+  } catch {
+    return mint();
+  }
+}
+
 /**
  * Floating chat assistant, mounted once in the root layout so the
- * conversation survives page navigation. Entirely rule-based: the knowledge
- * base arrives pre-built from the server (lib/chatbot) and matching happens
- * in `matchEntry`, so there is no API round-trip and nothing to rate-limit.
+ * conversation survives page navigation.
+ *
+ * With `live` set (Aleesa Web Chat configured, see lib/aleesa/webchat.ts)
+ * every question goes to /api/chat and Aleesa answers. Otherwise — or if that
+ * call fails — it answers rule-based from the knowledge base built on the
+ * server (lib/chatbot) via `matchEntry`.
  *
  * Deliberately non-modal — the page stays scrollable and there is no focus
  * trap, just Escape to close with focus returned to the launcher.
  */
-export default function ChatBot({ config }: { config: ChatConfig }) {
+export default function ChatBot({
+  config,
+  live = false,
+}: {
+  config: ChatConfig;
+  live?: boolean;
+}) {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([]);
   const [draft, setDraft] = useState("");
@@ -33,6 +59,7 @@ export default function ChatBot({ config }: { config: ChatConfig }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const launcherRef = useRef<HTMLButtonElement>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const sessionRef = useRef<string | null>(null);
 
   const openChat = () => {
     setOpen(true);
@@ -59,16 +86,43 @@ export default function ChatBot({ config }: { config: ChatConfig }) {
     setDraft("");
     setMessages((m) => [...m, { from: "user", text: q }]);
     setTyping(true);
+
+    if (live) {
+      sessionRef.current ??= getSessionId();
+      fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          text: q,
+          sessionId: sessionRef.current,
+          page: window.location.pathname,
+        }),
+      })
+        .then(async (res) => {
+          const data = (await res.json().catch(() => null)) as {
+            reply?: string;
+          } | null;
+          if (!res.ok || !data?.reply) throw new Error("No reply");
+          setMessages((m) => [...m, { from: "bot", text: data.reply! }]);
+        })
+        .catch(() => setMessages((m) => [...m, localReply(q)]))
+        .finally(() => setTyping(false));
+      return;
+    }
+
     // Short beat before the reply, so the exchange reads as a conversation
     // rather than the answer flashing in with the question.
     timerRef.current = setTimeout(() => {
-      const hit = matchEntry(q, config.entries);
-      const reply: Msg = hit
-        ? { from: "bot", text: hit.answer, links: hit.links, chips: hit.chips }
-        : { from: "bot", ...config.fallback };
-      setMessages((m) => [...m, reply]);
+      setMessages((m) => [...m, localReply(q)]);
       setTyping(false);
     }, 550);
+  };
+
+  const localReply = (q: string): Msg => {
+    const hit = matchEntry(q, config.entries);
+    return hit
+      ? { from: "bot", text: hit.answer, links: hit.links, chips: hit.chips }
+      : { from: "bot", ...config.fallback };
   };
 
   useEffect(() => {
@@ -142,7 +196,7 @@ export default function ChatBot({ config }: { config: ChatConfig }) {
                   className={
                     m.from === "user"
                       ? "max-w-[85%] rounded-lg rounded-br-none bg-[#1E4B8F] px-3.5 py-2.5 text-[14px] leading-[1.6] text-white"
-                      : "max-w-[88%] rounded-lg rounded-bl-none border border-[#E5E4E0] bg-white px-3.5 py-2.5 text-[14px] leading-[1.6] text-[#374151]"
+                      : "max-w-[88%] whitespace-pre-line rounded-lg rounded-bl-none border border-[#E5E4E0] bg-white px-3.5 py-2.5 text-[14px] leading-[1.6] text-[#374151]"
                   }
                 >
                   {m.text}
