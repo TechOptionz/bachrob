@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useRef, useState } from "react";
+import Turnstile, { type TurnstileHandle } from "./Turnstile";
 
 const topics = [
   "Individual tax return",
@@ -76,6 +77,14 @@ export default function ContactForm() {
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [errors, setErrors] = useState<Errors>({});
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [captchaError, setCaptchaError] = useState(false);
+  const turnstileRef = useRef<TurnstileHandle>(null);
+
+  const onCaptchaToken = useCallback((token: string | null) => {
+    setCaptchaToken(token);
+    if (token) setCaptchaError(false);
+  }, []);
 
   function errorProps(field: Field) {
     return {
@@ -129,6 +138,11 @@ export default function ContactForm() {
       return;
     }
 
+    if (!captchaToken) {
+      setCaptchaError(true);
+      return;
+    }
+
     setSending(true);
     const payload = {
       name: String(data.get("name") ?? "").trim(),
@@ -137,6 +151,7 @@ export default function ContactForm() {
       topic: String(data.get("topic") ?? "").trim(),
       message: String(data.get("message") ?? "").trim(),
       consent: data.get("consent") ? "on" : "",
+      captchaToken,
     };
 
     try {
@@ -149,6 +164,8 @@ export default function ContactForm() {
       setSent(true);
       form.reset();
     } catch {
+      // Tokens are single-use, so get a fresh one before any retry.
+      turnstileRef.current?.reset();
       setError(
         "Sorry — your message could not be sent. Please call (07) 3810 1000 or email admin@bachrob.com.au.",
       );
@@ -256,6 +273,17 @@ export default function ContactForm() {
             form.
           </label>
           <FieldError id="consent-error" message={errors.consent} />
+        </div>
+        <div>
+          <Turnstile ref={turnstileRef} onToken={onCaptchaToken} />
+          <FieldError
+            id="captcha-error"
+            message={
+              captchaError
+                ? "Please complete the security check before sending."
+                : undefined
+            }
+          />
         </div>
         {error && (
           <p className="m-0 text-[14px] leading-[1.5] text-[#B42318]">{error}</p>

@@ -8,7 +8,29 @@ type Payload = {
   topic?: string;
   message?: string;
   consent?: string;
+  captchaToken?: string;
 };
+
+// Confirms a Cloudflare Turnstile token server-side.
+async function verifyCaptcha(token: string, ip: string | null) {
+  const secret = process.env.TURNSTILE_SECRET_KEY;
+  if (!secret) {
+    console.error("[contact] TURNSTILE_SECRET_KEY is not set");
+    return false;
+  }
+  const form = new URLSearchParams({ secret, response: token });
+  if (ip) form.set("remoteip", ip);
+  try {
+    const res = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      { method: "POST", body: form },
+    );
+    const data = (await res.json()) as { success?: boolean };
+    return data.success === true;
+  } catch {
+    return false;
+  }
+}
 
 const topics = [
   "Individual tax return",
@@ -64,6 +86,16 @@ export async function POST(request: Request) {
 
   if (!body.consent) {
     return bad("Please confirm your consent so we can respond to you.");
+  }
+
+  const captchaToken =
+    typeof body.captchaToken === "string" ? body.captchaToken : "";
+  const ip =
+    request.headers.get("cf-connecting-ip") ??
+    request.headers.get("x-forwarded-for")?.split(",")[0].trim() ??
+    null;
+  if (!captchaToken || !(await verifyCaptcha(captchaToken, ip))) {
+    return bad("Security check failed. Please try again.");
   }
 
   // Enquiries are filed as Leads in Aleesa. Without the key (local dev) they
